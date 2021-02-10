@@ -37,25 +37,25 @@ class Shaman extends Component {
   }
 
   setSpirit = (spirit) => {
-    let tempHexes = this.state.hexes
-    tempHexes.concat(spirit.hexes)
-    tempHexes.concat(this.state.swandSpiritHexes)
+    let tempHexes = this.state.baseHexes
+    tempHexes = tempHexes.concat(spirit.hex)
+    tempHexes = tempHexes.concat(this.state.wandSpiritHexes)
 
     this.setState({
       spirit: spirit,
-      spiritHexes: spirit.hexes,
+      spiritHexes: spirit.hex,
       hexList: tempHexes
     })
   }
 
   setWandSpirit = (spirit) => {
-    let tempHexes = this.state.hexes
-    tempHexes.concat(spirit.hexes)
-    tempHexes.concat(this.state.spiritHexes)
+    let tempHexes = this.state.baseHexes
+    tempHexes = tempHexes.concat(this.state.spiritHexes)
+    tempHexes = tempHexes.concat(spirit.hex)
 
     this.setState({
       wandSpirit: spirit,
-      wandSpiritHexes: spirit.hexes,
+      wandSpiritHexes: spirit.hex,
       hexList: tempHexes
     })
   }
@@ -102,6 +102,9 @@ class Shaman extends Component {
 
       <h2>Select Wandering Spirit</h2>
       {wandSpiritList}
+
+      <h2>Available Hexes</h2>
+      {hexList}
 {/*         
         < DefHexes hexes={this.state.baseHexes} />
 
