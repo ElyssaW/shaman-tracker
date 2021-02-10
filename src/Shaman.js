@@ -63,6 +63,7 @@ class Shaman extends Component {
   setHex = (hex) => {
     let tempHexes = this.state.hexes
     tempHexes.push(hex)
+    console.log(tempHexes)
 
     this.setState({
       hexes: tempHexes
@@ -81,6 +82,10 @@ class Shaman extends Component {
   render () {
     
     let hexList = this.state.hexList.map(hex => {
+      return <button onClick={()=>{this.setHex(hex)}}>{hex.name}</button>
+    })
+
+    let shamanHexList = this.state.hexes.map(hex => {
       return <p>{hex.name}</p>
     })
 
@@ -102,6 +107,9 @@ class Shaman extends Component {
 
       <h2>Select Wandering Spirit</h2>
       {wandSpiritList}
+
+      <h2>Shaman's Hexes</h2>
+      {shamanHexList}
 
       <h2>Available Hexes</h2>
       {hexList}
