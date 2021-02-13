@@ -2,13 +2,14 @@
 import './App.css';
 import React, { Component } from 'react'
 import Spirit from './Spirit.js'
-import DefHexes from './DefHexes.js'
 import BasicInfo from './BasicInfo.js'
 import Spells from './Spells.js'
 
 import Data from './Data.js'
 import HexData from './HexData.js'
 import spirit from './Data.js';
+import SpiritList from './SpiritList.js'
+import HexList from './HexList.js'
 
 const data = Data
 
@@ -32,8 +33,7 @@ class Shaman extends Component {
 
     baseHexes: HexData,
     spiritHexes: [],
-    wandSpiritHexes: [],
-    hexList: HexData
+    wandSpiritHexes: []
   }
 
   setSpirit = (spirit) => {
@@ -43,8 +43,7 @@ class Shaman extends Component {
 
     this.setState({
       spirit: spirit,
-      spiritHexes: spirit.hex,
-      hexList: tempHexes
+      spiritHexes: spirit.hex
     })
   }
 
@@ -56,69 +55,71 @@ class Shaman extends Component {
     this.setState({
       wandSpirit: spirit,
       wandSpiritHexes: spirit.hex,
-      hexList: tempHexes
+      wandHexes: []
     })
   }
 
   setHex = (hex) => {
-    let tempHexes = this.state.hexes
-    tempHexes.push(hex)
-    console.log(tempHexes)
-
-    this.setState({
-      hexes: tempHexes
-    })
+    if (this.state.hexes.length < Math.floor(this.state.lvl / 2) && !this.state.hexes.includes(hex)) {
+      let tempHexes = this.state.hexes
+      tempHexes.push(hex)
+      console.log(tempHexes)
+  
+      this.setState({
+        hexes: tempHexes
+      })
+    }
   }
 
   setWandHex = (hex) => {
-    let tempHexes = this.state.wandHexes
-    tempHexes.push(hex)
-
-    this.setState({
-      wandHexes: tempHexes
-    })
+    if ((this.state.wandHexes.length === 0 || (this.state.lvl > 13 && this.state.wandHexes.length < 2)) && !this.state.hexes.includes(hex)) {
+      let tempHexes = this.state.wandHexes
+      tempHexes.push(hex)
+  
+      this.setState({
+        wandHexes: tempHexes
+      })
+    }
   }
 
   render () {
-    
-    let hexList = this.state.hexList.map(hex => {
-      return <button onClick={()=>{this.setHex(hex)}}>{hex.name}</button>
-    })
 
     let shamanHexList = this.state.hexes.map(hex => {
       return <p>{hex.name}</p>
     })
 
-    let spiritList = Object.keys(data).map(spiritKey => {
-      return <button onClick={()=>{this.setSpirit(data[spiritKey])}}>{data[spiritKey].name}</button>
-    })
-
-    let wandSpiritList = Object.keys(data).map(spiritKey => {
-      return <button onClick={()=>{this.setWandSpirit(data[spiritKey])}}>{data[spiritKey].name}</button>
+    let shamanWandHexList = this.state.wandHexes.map(hex => {
+      return <p>{hex.name}</p>
     })
 
     return (
       <div className='container'>
-        <h1>{Data.battle.name}</h1>
-        < BasicInfo shaman={this.state} />
+
+      <h2>Basic Info</h2>
+      < BasicInfo shaman={this.state} />
 
       <h2>Select Spirit</h2>
-      {spiritList}
+      < SpiritList setSpirit={this.setSpirit} spirits={Object.values(data)} />
 
       <h2>Select Wandering Spirit</h2>
-      {wandSpiritList}
+      < SpiritList setSpirit={this.setWandSpirit} spirits={Object.values(data)} />
 
       <h2>Shaman's Hexes</h2>
       {shamanHexList}
+      {shamanWandHexList}
 
-      <h2>Available Hexes</h2>
-      {hexList}
-{/*         
-        < DefHexes hexes={this.state.baseHexes} />
+      <h2>Available Base Hexes</h2>
+      < HexList setHex={this.setHex} hexes={this.state.baseHexes} />
 
-        < Spirit spirit={this.state.spirit} />
+      <h2>Available Spirit Hexes</h2>
+      < HexList setHex={this.setHex} hexes={this.state.spiritHexes} />
 
-        < Spirit spirit={this.state.wandSpirit} /> */}
+      <h2>Available Wandering Spirit Hexes</h2>
+      < HexList setHex={this.setWandHex} hexes={this.state.wandSpiritHexes} />
+
+      < Spirit spirit={this.state.spirit} />
+
+      < Spirit spirit={this.state.wandSpirit} />
         
       </div>
     )
