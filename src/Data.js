@@ -70,22 +70,27 @@ let spirit = {
 
         hex: [
             {
+                id: 0,
                 name: 'Ancestral Blessing',
                 type: '(Su)',
                 desc: 'The shaman can grant the blessings of her ancestors to any ally within 30 feet. The blessed creature receives a +1 competence bonus on attack and damage rolls. This blessing lasts until the blessed creature hits with an attack or deals damage to a target. The shaman can have only one ancestral blessing active at a time. If the shaman uses this ability again, the previous blessing immediately ends. At 8th level and 16th level, the bonuses provided by this blessing increase by 1.'
             }, {
+                id: 1,
                 name: 'Ghost Blade',
                 type: '(Su)',
                 desc: 'The shaman can touch a creature to grant all of her weapons the ghost touch weapon property for a number of rounds equal to her Charisma bonus. Once a creature has been the target of this ability, it cannot be the target of this ability again for 24 hours.',
             }, {
+                id: 2,
                 name: 'Intercessor',
                 type: '(Sp)',
                 desc: 'The shaman can invoke an ancestor spirit into an intact, humanoid or monstrous humanoid corpse to learn what the body knew in life. The acts as speak with dead, but the shaman may ask only a single question. If an animated corpse or undead is targeted with this ability, the hex immediately fails. Once a corpse has answered a single question, it cannot be targeted with this ability again.'
             }, {
+                id: 3,
                 name: 'Might of the Fallen',
                 type: '(Su)',
                 desc: 'The shaman can call upon the ancestral heroes of her family to bolster ailing allies. As a standard action, the shaman can cure 1 point of temporary ability damage affecting the creature touched. At 7th level, this increases to 1d4 points of temporary ability damage. Once a creature has been the target of this hex, it cannot be the target of this hex again for 24 hours'
             }, {
+                id: 4,
                 name: 'Wisdom of the Ages',
                 type: '(Su)',
                 desc: 'The shaman can call upon her ancestors for lore and guidance. She can use her Wisdom modifier instead of her Intelligence modifier on all Intelligence-based skill checks'
@@ -98,7 +103,7 @@ let spirit = {
     battle: {
         name: 'Battle',
         desc: 'A shaman who selects the battle spirit gains scars from every wound she takes, and the grit of battle always seems to cling on her body. When she calls upon one of this spirit’s abilities, she grows in stature—becoming taller and more muscular, with a grimace of rage stretching across her face.',
-        id: 0,
+        id: 1,
 
         spells: [
             {   name: 'Enlarge Person',
@@ -166,30 +171,35 @@ let spirit = {
 
         hex: [
             {
+                id: 0,
                 name: 'Battle Master',
                 type: 'Ex',
                 desc: 'The shaman makes an extra attack of opportunity each round. This ability stacks with the attacks of opportunity granted by the Combat Reflexes feat. At 8th level, the shaman gains the Weapon Specialization feat in a weapon of her choice as a bonus feat. At 16th level, the shaman gains the Greater Weapon Focus feat as a bonus feat, for the same weapon chosen for Weapon Specialization. The shaman doesn’t need to meet the prerequisites of these feats.'
             },
 
             {
+                id: 1,
                 name: 'Battle Ward',
                 type: 'Su',
                 desc: 'The shaman touches a willing creature (including herself ) and grants a battle ward. The next time a foe makes an attack roll against the target, the ward activates and grants a +3 deflection bonus to the warded creature’s AC. Each subsequent time she’s attacked, the defection bonus reduces by 1 (to +2 for the second time she’s attacked and +1 for the third). The ward fades when the bonus is reduced to +0 or after 24 hours, whichever comes first. At 8th level, the ward’s starting bonus increases to +4. At 16th level, it increases to +5. A creature affected by this hex cannot be affected by it again for 24 hours.'
             },
 
             {
+                id: 2,
                 name: 'Curse of Suffering',
                 type: 'Su',
                 desc: 'The shaman causes a creature within 30 feet to take more damage from bleed effects and causes its wounds to heal at a slower rate. When the cursed creature takes bleed damage, it takes 1 additional point of bleed damage (even if the bleed is ability damage). Furthermore, when the target is subject to an effect that would restore its hit points, that effect restores only half the normal amount of hit points. This curse lasts for a number of rounds equal to the shaman’s level. A creature affected by this hex cannot be affected by it again for 24 hours.'
             },
 
             {
+                id: 3,
                 name: 'Eyes of Battle', 
                 type: 'Su',
                 desc: 'The shaman’s senses become magically heightened in the heat of battle. As a swift action, she can grant herself a +10 insight bonus for 1 round on Perception checks made to notice and pinpoint invisible creatures within 30 feet. She can instead use this ability as a swift action to ignore the affects of cover or partial cover (but not total cover) on her next attack, as long as that attack is made before the end of her next turn. The shaman can use this ability a number of times per day equal to her shaman level.'
             },
 
             {
+                id: 4,
                 name: 'Hampering Hex', 
                 type: 'Su',
                 desc: 'The shaman causes a creature within 30 feet to take a –2 penalty to AC and CMD for a number of rounds equal to the shaman’s level. A successful Will saving throw reduces this to just 1 round. At 8th level, the penalty becomes –4. Whether or not the save is successful, a creature affected by a hampering hex cannot be the target of this hex again for 24 hours'
@@ -202,7 +212,7 @@ let spirit = {
     bones: {
         name: 'Bones',
         desc: 'A shaman who selects the bones spirit is cadaverously thin, with sunken eye sockets and dead eyes that stare off into the distance. Her body has a faint smell of the grave. When she calls upon one of this spirit’s abilities, a ghostly wind whips her hair and clothes about, and the unpleasant stench becomes more prominent.',
-        id: 0,
+        id: 2,
 
         spells: [
             {   name: 'Cause Fear',
@@ -269,22 +279,27 @@ let spirit = {
 
         hex: [
             {
+                id: 0,
                 name: 'Grave Sight',
                 type: '(Su)',
                 desc: 'The shaman sees the states of life, death, undeath, and general health of those around her. When using this ability, she can tell whether or not creatures within 30 feet that she can see are living, wounded, dying, or dead, as well as determine if any are undead. Lastly, she can tell if those creatures are poisoned or diseased. The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to be consecutive'
             }, {
+                id: 1,
                 name: 'Fearful Gaze',
                 type: '(Su)',
                 desc: 'With a single shout, the shaman causes one target creature within 30 feet to become shaken for 1 round. A successful Will saving throw negates this effect. At 8th level, she makes the target frightened instead. At 16th level, she makes it panicked instead. This is a mind-affecting fear effect. A creature affected by this hex cannot be affected by it again for 24 hours'
             }, {
+                id: 2,
                 name: 'Deathly Being',
                 type: '(Su)',
                 desc: 'If the shaman is a living creature, she reacts to positive and negative energy as if she were undead—positive energy harms her, while negative energy heals her. If she’s an undead creature or a creature with the negative energy affinity ability, she gains a +1 bonus to her channel resistance. At 8th level, if she’s a living creature she gains a +4 bonus on saves against death effects and effects that drain energy, or if she’s an undead creature her bonus to channel resistance increases to +2. At 16th level, if the shaman a living creature, she takes no penalties from energy drain effects, though she can still be killed if she accrues more negative levels than she has Hit Dice. Furthermore, after 24 hours any negative levels the shaman has are removed without requiring her to succeed at an additional saving throw. If the shaman is an undead creature, her bonus to channel resistance increases to +4.'
             }, {
+                id: 3,
                 name: 'Bone Ward',
                 type: '(Su)',
                 desc: 'A shaman touches a willing creature (including herself ) and grants a bone ward. The warded creature becomes encircled by a group of flying bones that grant it a +2 deflection bonus to AC for a number of rounds equal to the shaman’s level. At 8th level, the ward increases to +3 and lasts for 1 minute. At 16th level, the bonus increases to +4 and lasts for 1 hour. A creature affected by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Bone Lock',
                 type: '(Su)',
                 desc: 'With a quick incantation, the shaman causes a creature within 30 feet to suffer stiffness in the joints and bones, causing the target to be staggered 1 round. A successful Fortitude saving throw negates this effect. At 8th level, the duration is increased to a number of rounds equal to her shaman level, though the target can attempt a save each round to end the effect if its initial saving throw fails. At 16th level, the target can no longer attempt a saving throw each round to end the effect, although it still attempts the initial Fortitude saving throw to negate the effect entirely.'
@@ -297,7 +312,7 @@ let spirit = {
     flame: {
         name: 'Flame',
         desc: 'A shaman who selects the flame spirit has a radiant light behind her eyes and the faint smell of smoke about her. When she calls upon one of this spirit’s abilities, a hungry spectral flame dances around her body.',
-        id: 1,
+        id: 3,
 
         spells: [
             {   name: 'Burning Hands',
@@ -365,30 +380,35 @@ let spirit = {
 
         hex: [
             {
+                id: 0,
                 name: 'Ward of Flames',
                 type: 'Su',
                 desc: 'The shaman touches a willing creature (including herself ) and grants a ward of flames. The next time the warded creature is struck with a melee attack, the creature making the attack takes 1d6 points of fire damage + 1 point of fire damage for every 2 shaman levels she possesses. This ward lasts for 1 minute, after which it fades away if not already expended. At 8th and 16th levels, the ward lasts for one additional attack. A creature affected by this hex cannot be affected by it again for 24 hours.'
             },
 
             {
+                id: 1,
                 name: 'Gaze of Flames',
                 type: 'Su',
                 desc: 'The shaman sees through fire, fog, and smoke without penalty as long as there is enough light to otherwise allow her to see normally. At 7th level, the shaman can gaze through any source of flame within 10 feet per shaman level, as clairvoyance. The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to be consecutive.'
             },
 
             {
+                id: 2,
                 name: 'Flame Curse',
                 type: 'Su',
                 desc: 'The shaman causes a creature within 30 feet to become vulnerable to fire until the end of the shaman’s next turn. If the creature is already vulnerable to fire, this hex has no effect. Fire immunity and resistances apply as normal, and any saving throw allowed by the effect that caused the damage reduces it as normal. At 8th and 16th levels, the duration of this hex is extended by 1 round. A creature affected by this hex cannot be affected by it again for 24 hours.'
             },
 
             {
+                id: 3,
                 name: 'Fire Nimbus', 
                 type: 'Su',
                 desc: 'he shaman causes a creature within 30 feet to gain a nimbus of fire. Though this doesn’t harm the creature, it does cause the creature to emit light like a torch, preventing it from gaining any benefit from concealment or invisibility. The target also takes a –2 penalty on saving throws against spells or effects that deal fire damage. The fire nimbus lasts for a number of rounds equal to the shaman’s level. A successful Will saving throw negates this effect. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours.'
             },
 
             {
+                id: 4,
                 name: 'Cinder Dance', 
                 type: 'Ex',
                 desc: 'The shaman’s base speed increases by 10 feet. At 5th level, the shaman receives Nimble Moves as a bonus feat. At 10th level, the shaman receives Acrobatic Steps as a bonus feat. The shaman doesn’t need to meet the prerequisites of these feats.'
@@ -401,7 +421,7 @@ let spirit = {
     frost : {
         name: 'Frost',
         desc: 'Far to the north, some tribes have adapted to life in the bitter cold of arctic regions. The frost spirit is seen by some as a protector of their way of life, and shamans who commune with the spirit are shown great respect in their communities. A shaman who selects the frost spirit has coarse white hair and always feels cold to the touch.',
-        id: 0,
+        id: 4,
 
         spells: [
             {   name: 'Frostbite',
@@ -444,22 +464,27 @@ let spirit = {
 
         hex: [
             {
+                id: 0,
                 name: 'Biting Frost',
                 type: '(Su)',
                 desc: 'The shaman turns the air frigid around a target within 30 feet for a number of rounds equal to the shaman’s Charisma modifier (minimum 1). The target must attempt a Fortitude saving throw at the beginning of each turn or be damaged by exposure to the extreme cold. On a failed save, the target takes 1d6 points of nonlethal damage. On a successful save, the effect ends immediately. Whether or not the initial save is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Hypothermia',
                 type: '(Su)',
                 desc: 'The shaman afflicts a creature within 30 feet with hypothermia. The target must attempt a Fortitude saving throw. On a failed save, the target is fatigued for 2 rounds. At 8th and 16th levels, the duration of this hex is extended by 1 round. Whether or not the save is sucessful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 2,
                 name: 'Sluggish',
                 type: '(Su)',
                 desc: 'The shaman causes the speed of a creature within 30 feet to be halved. The target can attempt a Fortitude saving throw to negate this effect. The penalty lasts for a number of rounds equal to the shaman’s character level and does not stack with other effects that reduce speed. Whether or not the save is successful, the creature can’t be the target of this hex again for 24 hours.'
             }, {
+                id: 3,
                 name: 'Tundra Dweller',
                 type: '(Su)', 
                 desc: 'The shaman touches a willing creature and grants it cold resistance 10 for a number of rounds equal to her Charisma modifier (minimum 1). This resistance does not stack with any other cold resistance, such as from special abilities or magical items. At 8th and 16th levels, the duration of this hex is extended by 1 round. A creature targeted by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Wilds-Attuned',
                 type: '(Ex)',
                 desc: 'The shaman receives Animal Affinity as a bonus feat and gains a +4 insight bonus on Knowledge (nature) checks when in a cold climate.'
@@ -540,22 +565,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Enveloping Void',
                 type: '(Su)',
                 desc: 'The shaman curses one creature with the dark void. As a standard action, the shaman can cause one enemy within 30 feet to treat the light level as two steps lower: bright light becomes dim light, normal light becomes darkness, and areas of dim light and darkness become supernaturally dark (like darkness, but even creatures with darkvision cannot see). This effect lasts for a number of rounds equal to the shaman’s level. A successful Will saving throw negates this effect. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Guiding Star',
                 type: '(Su)',
                 desc: 'Whenever the shaman can see the open sky at night, she can determine her precise location and can add her Wisdom modifier to her Charisma modifier on all Charisma-based skill checks. In addition, once per night while outdoors, she can cast one spell as if it were modified by the Empower Spell, Extend Spell, Silent Spell, or Still Spell feat without increasing the spell’s casting time or level. The shaman doesn’t need to possess the feat to use this ability.'
             }, {
+                id: 2,
                 name: 'Heaven\'s Leap',
                 type: '(Su)',
                 desc: 'The shaman is adept at creating tiny tears in the fabric of space, and temporarily stitching them together to reach other locations through a limited, one-way wormhole. As a standard action, the shaman can designate herself or a single ally that she can see who is within 30 feet of her. She can move that creature as if it were subject to jester’s jaunt. Once targeted by this hex, the ally cannot be the target of this hex again for 24 hours'
             }, {
+                id: 3,
                 name: 'Lure of the Heavens',
                 type: '(Su)',
                 desc: 'The shaman’s connection to the skies above is so strong that her feet barely touch the ground. At 1st level, she no longer leaves tracks. At 5th level, she can hover up to 6 inches above the ground or liquid surfaces. At 10th level, the shaman gains the ability to fly (as the spell) for a number of minutes per day equal to her shaman level—the duration does not need to be consecutive, but it must be used in 1-minute increments.'
             }, {
+                id: 4,
                 name: 'Starburn',
                 type: '(Su)',
                 desc: 'As a standard action, the shaman causes one creature within 30 feet to burn like a star. The creature takes 1d6 points of fire damage for every 2 levels the shaman possesses and emits bright light for 1 round. A successful Fortitude saving throw halves the damage and negates the emission of bright light. The shaman can use this hex a number of times per day equal to her Charisma modifier (minimum 1), but must wait 1d4 rounds between uses'
@@ -592,7 +622,7 @@ let spirit = {
     life: {
         name: 'Life',
         desc: 'A shaman who selects the life spirit appears more vibrant than most mortals. Her skin seems to glow, and her teeth are a pearly white. When she calls upon one of this spirit’s abilities, her eyes and hair shimmer in the light.',
-        id: 5,
+        id: 6,
 
         spells: [
             {   name: 'Detect Undead',
@@ -635,22 +665,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Curse of Suffering',
                 type: '(Su)',
                 desc: 'The shaman causes a creature within 30 feet to take more damage from bleed effects and causes its wounds to heal at a slower rate. When the cursed creature takes bleed damage, it takes 1 additional point of bleed damage (even if the bleed is ability damage). Furthermore, when the target is subject to an effect that would restore its hit points, that effect restores only half the normal amount of hit points. This curse lasts for a number of rounds equal to the shaman’s level. A creature affected by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Deny Succor',
                 type: '(Su)',
                 desc: 'The shaman can place this hex on a single creature within 30 feet. The target does not heal damage from cure spells and does not benefit from any spells or effects that remove conditions. This effect lasts for a number of rounds equal to 1/2 the shaman’s level. A successful Will saving throw negates this effect. Whether or not the saving throw is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 2,
                 name: 'Enhanced Cures',
                 type: '(Su)',
                 desc: 'When the shaman casts a cure spell, the maximum number of hit points healed is based on her shaman level, not the limit imposed by the spell. For example an 11th-level shaman with this hex can cast cure light wounds to heal 1d8+11 hit points instead of the normal 1d8+5 maximum.'
             }, {
+                id: 3,
                 name: 'Life Link',
                 type: '(Su)',
                 desc: 'The shaman creates a bond between herself and another creature within 30 feet. Each round at the start of the shaman’s turn, if the bonded creature is wounded for 5 or more hit points below its maximum hit points, it heals 5 hit points and the shaman takes 5 points of damage. The shaman can have one bond active per shaman level. The bond continues until the bonded creature dies, the shaman dies, the distance between her and the bonded creature exceeds 100 feet, or the shaman ends it as an immediate action. If the shaman has multiple bonds active, she can end as many as she wants with the same immediate action.'
             }, {
+                id: 4,
                 name: 'Life Sight',
                 type: '(Ex)',
                 desc: 'The shaman can see the states of life, death, and general health of those around her. When she uses this ability, she can tell whether or not creatures within 30 feet of her that she can see are living, wounded, dying, or dead. She can also tell if those creatures are confused, disabled, diseased, nauseated, poisoned, sickened or staggered. At 12th level, when using life sight she is able to sense all nearby living creatures; this functions similar to blindsight, but only for living creatures within 30 feet of her. The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to consecutive.'
@@ -687,7 +722,7 @@ let spirit = {
     lifeAlt: {
         name: 'Restoration',
         desc: 'A shaman who selects the life spirit appears more vibrant than most mortals. Her skin seems to glow, and her teeth are a pearly white. When she calls upon one of this spirit’s abilities, her eyes and hair shimmer in the light.',
-        id: 5,
+        id: 7,
 
         spells: [
             {   name: 'Remove Sickness',
@@ -730,22 +765,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Shell of Succor',
                 type: '(Su)',
                 desc: 'The shaman surrounds one touched creature with a ward of succoring energy, granting the target a number of temporary hit points equal to her Wisdom bonus + an additional 1d6 temporary hit points per 2 shaman levels she has (maximum 10d6). These temporary hit points last a number of minutes equal to the shaman’s level. The target always loses these temporary hit points first, even before other temporary hit points (including those from a kineticist’s force ward defense wild talent). If an attack deals fewer points of damage than the target’s temporary hit points from this shell of succor ability, it still reduces those temporary hit points but otherwise counts as a miss for the purpose of abilities that trigger on a hit or a miss. The shaman can use this hex a number of times per day equal to 1 + her Charisma bonus.'
             }, {
+                id: 1,
                 name: 'Spirit Boost',
                 type: '(Su)',
                 desc: 'Whenever the shaman casts a healing spell that heals a target up to its maximum hit points, any excess hit points persist for 1 round per shaman level as temporary hit points (up to a maximum number of temporary hit points equal to the shaman’s level).'
             }, {
+                id: 2,
                 name: 'Enhanced Cures',
                 type: '(Su)',
                 desc: 'When the shaman casts a cure spell, the maximum number of hit points healed is based on her shaman level, not the limit imposed by the spell. For example an 11th-level shaman with this hex can cast cure light wounds to heal 1d8+11 hit points instead of the normal 1d8+5 maximum.'
             }, {
+                id: 3,
                 name: 'Life Link',
                 type: '(Su)',
                 desc: 'The shaman creates a bond between herself and another creature within 30 feet. Each round at the start of the shaman’s turn, if the bonded creature is wounded for 5 or more hit points below its maximum hit points, it heals 5 hit points and the shaman takes 5 points of damage. The shaman can have one bond active per shaman level. The bond continues until the bonded creature dies, the shaman dies, the distance between her and the bonded creature exceeds 100 feet, or the shaman ends it as an immediate action. If the shaman has multiple bonds active, she can end as many as she wants with the same immediate action.'
             }, {
+                id: 4,
                 name: 'Life Sight',
                 type: '(Ex)',
                 desc: 'The shaman can see the states of life, death, and general health of those around her. When she uses this ability, she can tell whether or not creatures within 30 feet of her that she can see are living, wounded, dying, or dead. She can also tell if those creatures are confused, disabled, diseased, nauseated, poisoned, sickened or staggered. At 12th level, when using life sight she is able to sense all nearby living creatures; this functions similar to blindsight, but only for living creatures within 30 feet of her. The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to consecutive.'
@@ -782,7 +822,7 @@ let spirit = {
     lore: {
         name: 'Lore',
         desc: 'A shaman who selects the lore spirit appears far wiser and knowing that her age would suggest. Though she can seem unassuming, her eyes give the impression she is peering deep into all she looks at, seeing the secrets of the essential merely by concentrating.',
-        id: 5,
+        id: 8,
 
         spells: [
             {   name: 'Identify',
@@ -825,22 +865,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Arcane Enlightenment',
                 type: '(Su)',
                 desc: 'The shaman’s native intelligence grants her the ability to tap into arcane lore. The shaman can add a number of spells from the sorcerer/wizard spell list equal to her Charisma modifier (minimum 1) to the list of shaman spells she can prepare. To cast these spells she must have an Intelligence score equal to at least 10 + the spell’s level, but the saving throw DCs of these spells are based on her Wisdom rather than Intelligence. When she casts these spells, they are treated as divine rather than arcane. Each time the shaman gains a level after taking this hex, she can choose to replace one of these spells for a new spell on the wizard/sorcerer spell list.'
             }, {
+                id: 1,
                 name: 'Benefit of Wisdom',
                 type: '(Ex)',
                 desc: 'The shaman relies on wisdom rather than intellect to gain and retain knowledge. She can use her Wisdom modifier instead of her Intelligence modifier on all Intelligence-based skill checks.'
             }, {
+                id: 2,
                 name: 'Brain Drain',
                 type: '(Su)',
                 desc: 'As a standard action, the shaman violently probes the mind of a single intelligent enemy within 30 feet. The target can attempt a Will saving throw to negate the effect. If it succeeds, it immediately knows the source of the mental prying; otherwise, it’s wracked with pain and takes 1d4 points of damage for every 2 levels the shaman possesses. On the round following her successful use of this ability, the shaman can take a full-round action to sort through the jumble of stolen thoughts and memories to attempt a single Knowledge check using the victim’s bonus with that skill. The random stolen thoughts remain in the shaman’s mind for a number of rounds equal to her Charisma modifier (minimum 1), and she can treat the knowledge gained as if she used detect thoughts. This is a mind-affecting effect. Once she successfully affects a creature, she cannot use this hex on that creature again for 24 hours.'
             }, {
+                id: 3,
                 name: 'Confusion Curse',
                 type: '(Ex)',
                 desc: 'The shaman’s command of lore can cause weaker minds to become mired in confusion. The shaman chooses a single intelligent target within 30 feet. That creature must succeed at a Will saving throw or become confused for a number of rounds equal to the shaman’s Charisma modifier (minimum 1). Once affected by this hex, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Share Knowledge',
                 type: '(Ex)',
                 desc: 'The shaman targets a single willing ally within 30 feet and shares her knowledge and experience with that target for a number of minutes equal to her Charisma modifier. During that time, the subject knows the languages that the shaman does and uses the shaman’s skill modifier on all Knowledge checks instead of its own. A creature affected by this hex cannot be affected by it again for 24 hours.'
@@ -877,7 +922,7 @@ let spirit = {
     mammoth: {
         name: 'Mammoth',
         desc: 'A shaman who selects the mammoth spirit is abnormally tall and stocky, with thick shaggy hair. When she uses a special ability of this spirit, her muscles ripple and flex, and her stature seems even greater than before. At times, particularly when she uses her most powerful abilities, a ghostly image of a mammoth may seem to rise around her as a visible aura of ghostly power.',
-        id: 5,
+        id: 9,
 
         spells: [
             {   name: 'Enlarge Person',
@@ -920,22 +965,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Burden of the Beast',
                 type: '(Su)',
                 desc: 'The shaman causes one creature within 30 feet to become heavy and lethargic. The creature is treated as if it were carrying a medium load. If the creature is already carrying a medium load, it is instead treated as if it were carrying a heavy load. If the creature is carrying a heavy load, its maximum Dexterity bonus to AC is reduced to +0, it takes a –9 armor check penalty, and its movement is reduced to 5 feet. The effect lasts for a number of rounds equal to the shaman’s level. A successful Will saving throw negates this effect. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Mammoth\'s Hide',
                 type: '(Su)',
                 desc: 'The shaman can touch a willing ally and cause its skin to thicken and sprout thick, shaggy fur. The creature gains a +2 enhancement bonus to natural armor and cold resistance 5 for 10 minutes. At 9th level, the enhancement bonus increases to +3 and the cold resistance to 10. At 15th level, this enhancement bonus increases to +4 and the cold resistance to 15. The shaman can use this ability a number of times per day equal to 3 + her Charisma bonus.'
             }, {
+                id: 2,
                 name: 'Phantom Stampede',
                 type: '(Su)',
                 desc: 'The shaman summons a host of ghostly herd beasts to trample a single creature. These phantom beasts affect only the target creature, which is buffeted and pummeled by their passing. The creature takes no damage from the ability, but takes a -4 penalty to its CMD against bull rush, overrun, and trip attempts. Additionally, spellcasters under the effect of this ability take a -4 penalty on concentration checks. The target receives no saving throw to negate this effect. This effect lasts a number of rounds equal to the shaman’s level. The creature can’t be the target of this hex again for 24 hours.'
             }, {
+                id: 3,
                 name: 'Primal Speaker',
                 type: '(Ex)',
                 desc: 'The shaman can speak with mammoths and any other megafauna or elephant creatures as if she were under the effects of speak with animals. At 5th level, the shaman gains a bonus on Handle Animal checks when dealing with those animals equal to half her shaman level. At 10th level, the shaman can affect one such animal within 30 feet as if she’d cast charm animal (Will negates). Whether or not the target succeeds at the saving throw, it can’t be the target of this hex again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Thunder Foot',
                 type: '(Ex)',
                 desc: 'The shaman’s body thickens and becomes more muscular. For the purpose of the overrun combat maneuver, she treats her shaman level as her base attack bonus when calculating her CMB and CMD. At 7th level, the shaman gains Improved Overrun as a bonus feat. At 11th level, the shaman gains Greater Overrun as a bonus feat. The shaman doesn’t need to meet the prerequisites of these feats.'
@@ -972,7 +1022,7 @@ let spirit = {
     nature: {
         name: 'Nature',
         desc: 'A shaman who selects the nature spirit takes on an appearance that reflects the aspect of the natural world she has the closest connection to. A nature shaman from the forest has a green tinge to her skin and hair, with eyes of sparkling emerald and the scent of green leaves and flowers about her. A nature shaman from the tundra is typically alabaster pale, with platinum hair and crystal blue eyes, and her skin always seems strangely cold.',
-        id: 5,
+        id: 10,
 
         spells: [
             {   name: 'Charm Animal',
@@ -1015,22 +1065,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Entangling Curse',
                 type: '(Su)',
                 desc: 'The shaman entangles a creature within 30 feet for a number of rounds equal to the shaman’s Charisma modifier (minimum 1). A successful Reflex saving throw negates this effect. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Erosion Curse',
                 type: '(Su)',
                 desc: 'The shaman summons the powers of nature to erode a construct or object within 30 feet. This erosion deals 1d6 points of damage per 2 shaman levels, ignoring hardness and damage reduction. If used against a construct or an object in another creature’s possession, the construct or the creature possessing the object can attempt a Reflex saving throw to halve the damage. Once an object or a construct is damaged by this erosion, it cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 2,
                 name: 'Friends to Animal',
                 type: '(Su)',
                 desc: 'The shaman can spontaneously cast summon nature’s ally spells as a druid. In addition, all animals within 30 feet of the shaman receive a sacred bonus on all saving throws equal to the shaman’s Charisma modifier.'
             }, {
+                id: 3,
                 name: 'Speak with Animals',
                 type: '(Ex)',
                 desc: 'Choose a specific kind of animal: eagle, fox, dog, and so on. The shaman gains the ability to converse with that type of animal as if she were under the effects of speak with animal. The shaman gains the ability to communicate with an additional kind of animal for every 3 shaman levels she possesses (two animals at 3rd level, three at 6th, up to a maximum of seven at 18th level).'
             }, {
+                id: 4,
                 name: 'Stormwalker',
                 type: '(Su)',
                 desc: 'The shaman can move through non-magical fog, rain, mist, snow, and other environmental effects without penalty (see Weather). She is never slowed by such effects, and she doesn’t need to attempt Acrobatics skill checks to move across such surfaces. She can also move through magical environmental effects that she created. At 10th level, the shaman can see twice as far as normal through environmental effects, whether or not they are magical in nature.'
@@ -1067,7 +1122,7 @@ let spirit = {
     slums: {
         name: 'Slums',
         desc: 'A shaman who selects the slums spirit gains the city’s alleys and avenues as steadfast allies. The rats in the gutter, the torches along the walls, the coins that flow through the market are all a part of her and serve her whim.',
-        id: 5,
+        id: 11,
 
         spells: [
             {   name: 'Charm Person',
@@ -1110,18 +1165,22 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Accident',
                 type: '(Su)',
                 desc: 'The shaman causes a target within 30 feet to stumble and fall. The shaman attempts a caster level check with a DC equal to the target’s CMD against trip attempts. On a successful check, the target falls prone and takes 1d6 points of damage. If the target is adjacent to a pit or similar drop-off, he must also succeed at a Reflex save (with a DC equal to the shaman’s caster level check) or fall into the pit. Observers must succeed at a Perception or Sense Motive check with a DC equal to the shaman’s caster level check to identify her as the source of the accident.'
             }, {
+                id: 1,
                 name: 'Bad Penny',
                 type: '(Su)',
                 desc: 'As a standard action, the shaman can curse a coin. The next bearer of the cursed coin takes a –2 penalty on all saving throws and skill checks as long he has the coin on his person. Once the coin leaves his person, the curse ends and the coin becomes a mundane piece of tender again. At 8th level, the penalty becomes –4. If the shaman curses a new coin, the previous curse ends. This is a curse effect.'
             }, {
+                id: 2,
                 name: 'City Spirit',
                 type: '(Su)',
                 desc: 'As a swift action, the shaman channels the city’s spirit through herself, gaining a +4 bonus on all Dexterity– and Wisdom-based skill checks. She can use this ability for a number of rounds per day equal to 3 + her Charisma modifier. These rounds need not be consecutive.'
             }, {
+                id: 3,
                 name: 'Ward of the City',
                 type: '(Su)',
                 desc: 'The spirit of the city shrouds one creature the shaman touches from the hazards of the slums. The warded creature gains a +5 bonus on saves against disease and poison, and a +25% bonus on percentage chances to negate critical hits and sneak attacks. (This stacks with effects such as fortification, or abilities that grant a creature with no chance to negate critical hits a flat 25% chance.) Each time the ward is used (whether the roll is successful or not), the bonuses are reduced by 1 and 5%, respectively. The ward ends when the bonuses are reduced to 0, when the shaman wards a new creature, or after 24 hours, whichever comes first. At 8th level and 16th level, the ward’s starting bonuses increase by 2 and 10%, respectively. A creature affected by this hex cannot be affected by it again for 24 hours.'
@@ -1158,7 +1217,7 @@ let spirit = {
     stone: {
         name: 'Stone',
         desc: 'The skin of a shaman who selects the stone spirit takes on a rough, stony appearance. When the shaman calls upon one of this spirit’s abilities, tiny gemstones underneath her flesh pulse with a bright glow, like phosphorescent geodes glittering in a dark cave.',
-        id: 5,
+        id: 12,
 
         spells: [
             {   name: 'Magic Stone',
@@ -1201,22 +1260,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Crystal Sight',
                 type: '(Ex)',
                 desc: 'The shaman sees through stone, earth, or sand as easily as if it were transparent crystal. Her gaze can penetrate a number of feet equal to her shaman level (or 1/12th this thickness of metal). The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to be consecutive.'
             }, {
+                id: 1,
                 name: 'Lodestone',
                 type: '(Su)',
                 desc: 'The shaman causes one creature within 30 feet to become heavy and lethargic. The creature is treated as if it were carrying a medium load. If the creature is already carrying a medium load, it is instead treated as if it were carrying a heavy load. If the creature is carrying a heavy load, its maximum Dexterity bonus to AC is reduced to +0, it takes a –9 armor check penalty, and its movement is reduced to 5 feet. The effect lasts for a number of rounds equal to the shaman’s level. A successful Will saving throw negates this effect. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 2,
                 name: 'Metal Curse',
                 type: '(Su)',
                 desc: 'The shaman causes a creature within 30 feet to become slightly magnetic until the end of the shaman’s next turn. Whenever the creature is attacked with a melee or ranged weapon constructed primarily of metal, it takes a –2 penalty to AC. At 8th and 16th levels, the penalty increases by –2 and the duration extends by 1 round. Once affected, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 3,
                 name: 'Stone Stability',
                 type: '(Ex)',
                 desc: ' The shaman receives a +4 bonus to her CMD when resisting bull rush or trip attempts as long as she is standing on the ground. At 5th level, the shaman receives Improved Trip as a bonus feat. At 10th level, the shaman receives Greater Trip as a bonus feat. The shaman does not need to meet the prerequisites of these feats.'
             }, {
+                id: 4,
                 name: 'Ward of Stone',
                 type: '(Su)',
                 desc: 'The shaman touches a willing creature (including herself ) and grants a ward of stoene. The next time the warded creature is struck with a melee attack, it is treated as if it has DR 5/adamantine. This ward lasts for 1 minute, after which it fades away if not already expended. At 8th and 16th levels, the ward lasts for one additional attack. A creature affected by this hex cannot be affected by it again for 24 hours.'
@@ -1253,7 +1317,7 @@ let spirit = {
     tribe: {
         name: 'Tribe',
         desc: 'A shaman who selects the tribe spirit strives to protect her allies, whether they be a traditional tribal unit or a chosen group of adventuring companions.',
-        id: 5,
+        id: 13,
 
         spells: [
             {   name: 'Bless',
@@ -1296,22 +1360,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Curse of Faltering',
                 type: '(Su)',
                 desc: 'As an immediate action when an enemy within 30 feet threatens a critical hit, the shaman can force the creature to reroll its original attack roll with a penalty equal to the shaman’s Charisma modifier. The target can attempt a Will save to negate this ability. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours. This is a curse effect'
             }, {
+                id: 1,
                 name: 'Curse of Isolation',
                 type: '(Ex)',
                 desc: 'The shaman makes an enemy within 30 feet keenly feel its status outside the tribe. For a number of rounds equal to the shaman’s level, the target gains no benefit from flanking or the aid another action, and it doesn’t benefit from morale bonuses. The target can attempt a Will save to negate this ability. Whether or not the save is successful, the creature cannot be the target of this hex again for 24 hours. This is a curse effect.'
             }, {
+                id: 2,
                 name: 'Steadfast Example',
                 type: '(Su)',
                 desc: 'The shaman touches a willing creature and bolsters its mental and emotional defenses. The next time the target attempts a Will saving throw, the subject can use the shaman’s Will saving throw bonus instead of his own. The shaman can have only one creature under the effect of this hex at a time, and a creature affected by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 3,
                 name: 'Threatening Coordination Hex',
                 type: '(Su)',
                 desc: 'The shaman causes a creature within 30 feet to view the shaman’s allies as obstacles. The target treats squares adjacent to the shaman’s allies as difficult terrain for a number of rounds equal to the shaman’s level, or for 1 round if the target succeeds at a Will saving throw. Whether or not the save is successful, a creature affected by this hex cannot be the target of it again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Touch of Succor',
                 type: '(Su)',
                 desc: 'The shaman can touch a willing creature as a standard action to remove one of the following conditions: fatigued, shaken, or sickened. At 8th level, she adds confused and frightened to the list of conditions she can remove. At 12th level, she also adds dazed, nauseated, and panicked. The shaman can use this ability a number of times per day equal to her shaman level'
@@ -1348,7 +1417,7 @@ let spirit = {
     waves: {
         name: 'Waves',
         desc: 'A shaman who selects the waves spirit has a fluid grace that exhibits itself whenever she moves. When she calls upon one of this spirit’s abilities, floating orbs dance about her, sublimating between icy crystals, misty vapors, and globules of water.',
-        id: 5,
+        id: 14,
 
         spells: [
             {   name: 'Hydraulic Push',
@@ -1391,22 +1460,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Beckoning Chill',
                 type: '(Su)',
                 desc: 'The shaman causes one creature within 30 feet to become more susceptible to the sapping powers of cold for 1 minute. When a creature takes cold damage while under this effect, it is entangled for 1 round. If the creature takes cold damage while already entangled by beckoning chill, the duration of the entangled condition increases by 1 round. Once affected, the creature cannot be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Crashing Waves',
                 type: '(Su)',
                 desc: 'The force of a waves shaman’s water spells can bring even the mightiest of foes to the ground. When the shaman casts a spell with the water descriptor, she does so at 1 caster level higher. If that spell deals damage, the target must succeed at a Fortitude saving throw or be knocked prone. At 8th level, the shaman casts water spells at 2 caster levels higher. At 16th level, her ability to knock creatures prone extends to any spell that deals damage.'
             }, {
+                id: 2,
                 name: 'Fluid Magic',
                 type: '(Su)',
                 desc: 'The shaman’s magic is not constrained by the reservoirs of magic that hold others back. She is able to prepare her spirit magic spells in her regular spell slots. If the shaman changes her wandering spirit, any prepared spirit magic spell belonging to that spirit becomes an open spell slot.'
             }, {
+                id: 3,
                 name: 'Mist\'s Shroud',
                 type: '(Su)',
                 desc: 'The shaman touches a willing creature (including herself ) and enshrouds that creature in mist. This grants the creature concealment as the blur spell. The mist dissipates after it causes an attack to miss because of concealment or after 1 minute, whichever comes first. At 8th and 16th levels, the mist lasts for one additional attack. A creature affected by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 4,
                 name: 'Water Sight',
                 type: '(Su)',
                 desc: 'The shaman sees through fog and mist without penalty as long as there is enough light to otherwise allow her to see normally. At 7th level, she can use can use scrying, using any calm pool of water that’s at least 1 foot in diameter as the sole focus. At 15th level, this functions as greater scrying. She can use these abilities for a number of rounds per day equal to her shaman level, but these rounds do not need to be consecutive.'
@@ -1443,7 +1517,7 @@ let spirit = {
     wind: {
         name: 'Wind',
         desc: 'A shaman who selects the wind spirit appears windswept, and her movements seem lithe and carefree.',
-        id: 5,
+        id: 15,
 
         spells: [
             {   name: 'Alter Winds',
@@ -1486,22 +1560,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Air Barrier',
                 type: '(Su)',
                 desc: 'The shaman creates an invisible shell of air that grants her a +4 armor bonus to AC. At 7th level and every 4 levels thereafter, this bonus increases by 2. At 13th level, this barrier causes incoming arrows, rays, and other ranged attacks requiring an attack roll against her to suffer a 50% miss chance. The shaman can use this barrier for 1 hour per shaman level. This duration does not need to be consecutive, but it must be spent in 1-hour increments.'
             }, {
+                id: 1,
                 name: 'Sparking Aura',
                 type: '(Su)',
                 desc: 'The shaman causes a creature within 30 feet to spark and shimmer with electrical energy. Though this does not harm the creature, it does cause the creature to emit light like a torch, preventing it from gaining any benefit from concealment or invisibility. Furthermore, while the aura lasts, whenever the target is hit with a metal melee weapon, it also takes an amount of electricity damage equal to the shaman’s Charisma modifier. The sparking aura lasts a 1 round for every 2 shaman levels the shaman possesses. A creature affected by this hex cannot be affected by it again for 24 hours.'
             }, {
+                id: 2,
                 name: 'Vortex Spells',
                 type: '(Su)',
                 desc: 'Whenever the shaman confirms a critical hit against an opponent with a spell, the target is staggered for 1 round. At 11th level, the duration increases to 1d4 rounds.'
             }, {
+                id: 3,
                 name: 'Wind Sight',
                 type: '(Su)',
                 desc: 'The shaman ignores the penalties on Perception checks caused by wind and the first 100 feet of distance. At 7th level she can, as a standard action, hear or see into any area—as clairaudience or clairvoyance, using that spell’s range—provided that there’s an unobstructed path for air to travel between the shaman and the target area. This doesn’t require line of effect, meaning the path can turn corners and go through spaces as narrow as 1 inch in diameter. The shaman can use this ability a number of rounds per day equal to her shaman level, but these rounds do not need to be consecutive.'
             }, {
+                id: 4,
                 name: 'Wind Ward',
                 type: '(Su)',
                 desc: 'The shaman can touch a willing creature (including herself ) and grants a ward of wind. This ward lasts for a number of rounds equal to the shaman’s level. When a warded creature is attacked with an arrow, ray, or other ranged attack that requires an attack roll, that attack suffers a 20% miss chance. At 8th level, the ward lasts for 1 minute for every level the shaman possesses. At 16th level, the miss chance increases to 50%. Once affected, the creature cannot be the target of this hex again for 24 hours.'
@@ -1538,7 +1617,7 @@ let spirit = {
     wood: {
         name: 'Wood',
         desc: 'A shaman who selects the wood spirit has a skin tone similar to the coloration of trees in her home region. Her vibrant hair is fragrant and resembles leaves and blossoms.',
-        id: 5,
+        id: 16,
 
         spells: [
             {   name: 'Shillelagh',
@@ -1581,22 +1660,27 @@ let spirit = {
         
         hex: [
             {
+                id: 0,
                 name: 'Hex of Lignification',
                 type: '(Su)',
                 desc: 'The shaman causes a creature within 30 feet to turn into a twisted, treelike shape for 2 rounds. The target gains hardness 5 but is staggered, and can negate the effect with a successful Fortitude saving throw. Whether or not the target succeeds at its save, it can’t be the target of this hex again for 24 hours.'
             }, {
+                id: 1,
                 name: 'Nature\'s Gift',
                 type: '(Su)',
                 desc: 'Once per day, the shaman can command trees and other plants to yield magical berries and fruit. This ability functions as goodberry, except the maximum number of hit points it can restore to a subject in a 24-hour period from this hex is equal to the shaman’s Charisma modifier (minimum 1 hit point per day).'
             }, {
+                id: 2,
                 name: 'Spines and Brambles',
                 type: '(Su)',
                 desc: 'With a beckoning gesture, the shaman conjures spiny shrubs in a number of squares equal to her Charisma modifier (minimum 1) within 30 feet. The squares become filled with light undergrowth. The shaman can pass through the affected squares without impediment. When the shaman uses this hex again, any previously conjured undergrowth withers away.'
             }, {
+                id: 3,
                 name: 'Verdant Path',
                 type: '(Sp)',
                 desc: 'Even the most tangled briars make way for the shaman, and suitable roots and branches appear to support her feet. The shaman gains woodland stride, as per the druid ability of the same name. At 8th level, she can use air walk at will whenever she is within 10 feet of a tree, though the effect ends instantly when she moves farther than 10 feet from a tree.'
             }, {
+                id: 4,
                 name: 'Whispering Leaves',
                 type: '(Sp)',
                 desc: 'Whenever the shaman is within 10 feet of a tree or undergrowth, she can cast whispering wind as a spell-like ability with a caster level equal to her shaman level. The targeted area must also contain trees or undergrowth, which relay the message in a gentle, rustling voice. At 8th level, the shaman can also listen to the targeted area as though she were using clairaudience/clairvoyance for the 1 round during which the hex is delivering the message.'

@@ -16,7 +16,7 @@ const data = Data
 class Shaman extends Component {
 
   state = {
-    name: 'Test',
+    name: 'Test the Demo Shaman',
     lvl: 10,
     str: 11,
     dex: 14,
@@ -33,7 +33,9 @@ class Shaman extends Component {
 
     baseHexes: HexData,
     spiritHexes: [],
-    wandSpiritHexes: []
+    wandSpiritHexes: [],
+
+    currentTab: 'spirit'
   }
 
   setSpirit = (spirit) => {
@@ -92,35 +94,91 @@ class Shaman extends Component {
       return <p>{hex.name}</p>
     })
 
+    let display 
+
+    {
+      switch(this.state.currentTab) {
+      case 'spirit':
+        display = (
+          <>
+          <div className='spirit-div'>
+            <h2>Select Spirit</h2>
+            < SpiritList setSpirit={this.setSpirit} spirits={Object.values(data)} />
+          </div>
+
+          <div className='spirit-div'>
+            < Spirit spirit={this.state.spirit} />
+          </div>
+          </>
+        )
+        break;
+      case 'wand':
+        display = (
+          <>
+            <div className='wandering-div'>
+              <h2>Select Wandering Spirit</h2>
+              < SpiritList setSpirit={this.setWandSpirit} spirits={Object.values(data)} />
+            </div>
+
+            <div className='spirit-div'>
+              < Spirit spirit={this.state.wandSpirit} />
+            </div>
+          </>
+        )
+        break;
+      case 'hex':
+        display = (
+          <>
+          <div className='hex-list-div'>
+            <h2>Available Base Hexes</h2>
+            < HexList setHex={this.setHex} hexes={this.state.baseHexes} />
+          </div>
+
+          <div className='hex-list-div'>
+            <h2>Available Spirit Hexes</h2>
+            < HexList setHex={this.setHex} hexes={this.state.spiritHexes} />
+          </div>
+
+          <div className='hex-list-div'>
+            <h2>Available Wandering Spirit Hexes</h2>
+            < HexList setHex={this.setWandHex} hexes={this.state.wandSpiritHexes} />
+          </div>
+          </>
+        )
+        break;
+
+      default:
+        display = (
+          <p>Select a spirit and some hexes to build your shaman!</p>
+        )
+        break;
+      }
+    }
+
     return (
-      <div className='container'>
+      <div className='container shaman-main'>
 
-      <h2>Basic Info</h2>
-      < BasicInfo shaman={this.state} />
+        <div className='shaman-info'>
+          < BasicInfo shaman={this.state} />
 
-      <h2>Select Spirit</h2>
-      < SpiritList setSpirit={this.setSpirit} spirits={Object.values(data)} />
+          <div className='current-hex-list-div'>
+            <h2>Shaman's Hexes</h2>
+            {shamanHexList}
+            {shamanWandHexList}
+          </div>
+        </div>
 
-      <h2>Select Wandering Spirit</h2>
-      < SpiritList setSpirit={this.setWandSpirit} spirits={Object.values(data)} />
+        <div className='shaman-select'>
+          <ul className='selection-toggle'>
+            <li className='select-button one' onClick={()=>{this.setState({ currentTab: 'info' })}}>Info</li>
+            <li className='select-button two' onClick={()=>{this.setState({ currentTab: 'spirit' })}}>Spirit</li>
+            <li className='select-button three' onClick={()=>{this.setState({ currentTab: 'wand' })}}>Wandering Spirit</li>
+            <li className='select-button four' onClick={()=>{this.setState({ currentTab: 'hex' })}}>Hexes</li>
+            < hr />
+          </ul>
 
-      <h2>Shaman's Hexes</h2>
-      {shamanHexList}
-      {shamanWandHexList}
-
-      <h2>Available Base Hexes</h2>
-      < HexList setHex={this.setHex} hexes={this.state.baseHexes} />
-
-      <h2>Available Spirit Hexes</h2>
-      < HexList setHex={this.setHex} hexes={this.state.spiritHexes} />
-
-      <h2>Available Wandering Spirit Hexes</h2>
-      < HexList setHex={this.setWandHex} hexes={this.state.wandSpiritHexes} />
-
-      < Spirit spirit={this.state.spirit} />
-
-      < Spirit spirit={this.state.wandSpirit} />
-        
+          {display}
+        </div>
       </div>
     )
   }

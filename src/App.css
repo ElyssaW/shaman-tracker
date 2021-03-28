@@ -1,3 +1,82 @@
+/* SNIPPETS */
+
+.bold {
+  font-weight: bolder;
+}
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
 .container {
   margin: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    margin: 15px;
+  }
+}
+
+.shaman-main {
+  display: flex;
+  
+  width: 1000px;
+}
+
+.shaman-info {
+  background-color: turquoise;
+  padding: 20px;
+  min-width: 250px;
+  width: 250px;
+  height: fit-content;
+}
+
+.selection-toggle {
+  display: inline;
+  text-align: center;
+}
+
+.select-button {
+  display: inline-block;
+  width: 25%;
+  padding: 5px 50px;
+  margin: 0;
+  text-decoration: none;
+  color: #333;
+}
+
+.two:hover ~ hr {
+  margin-left: 25%;
+}
+
+.three:hover ~ hr {
+  margin-left: 50%;
+}
+
+.four:hover ~ hr {
+  margin-left: 75%;
+}
+
+hr {
+  height: .25rem;
+  width: 25%;
+  margin: 0;
+  background: tomato;
+  border: none;
+  transition: .3s ease-in-out;
+}
+
+.shaman-select {
+  margin: 0;
+  padding: 0 20px;
+}
+
+button {
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  color: white;
+  background-color: coral;
 }
