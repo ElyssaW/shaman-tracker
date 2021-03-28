@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Shaman from './Shaman.js'
+import App from './App.js'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Shaman />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
