@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 class NewShaman extends Component {
     
@@ -19,6 +20,7 @@ class NewShaman extends Component {
         e.preventDefault()
 
         const shaman = {
+            id: uuidv4(),
             name: this.state.newName,
             str: this.state.str,
             dex: this.state.dex,
@@ -29,7 +31,11 @@ class NewShaman extends Component {
             lvl: this.state.lvl
         }
 
-        this.props.setShaman(shaman)
+        let tempShamans = this.props.shamans 
+        tempShamans[shaman.id] = shaman
+        localStorage.setItem('shamans', JSON.stringify(tempShamans))
+
+        this.props.setCurrentShaman(shaman)
         this.setState({ submitted: true })
     }
 

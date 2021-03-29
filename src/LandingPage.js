@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import ShamanList from './Load/ShamanList.js'
 
 class LandingPage extends Component {
     render () {
+
         return (
             <div>
                 <div>
                     <p>Load Previous Shaman</p>
+                    < ShamanList shamans={this.props.shamans} />
                     < Link to='/shaman' >Load</Link>
                 </div>
 

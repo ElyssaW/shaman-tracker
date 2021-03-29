@@ -82,9 +82,9 @@ class Shaman extends Component {
 
         <div className='current-hex-list-div'>
           <h2>Shaman's Hexes</h2>
-          < HexDisplayList 
+          {/* < HexDisplayList 
             hexes={this.props.shaman.hexes}
-          />
+          /> */}
           </div>
         </div>
 
