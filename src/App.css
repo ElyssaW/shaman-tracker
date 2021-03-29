@@ -4,6 +4,20 @@
   font-weight: bolder;
 }
 
+.flex {
+  display: flex;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   width: 50%;
   margin: 0 auto;
