@@ -28,7 +28,10 @@ class NewShaman extends Component {
             int: this.state.int,
             wis: this.state.wis,
             cha: this.state.cha,
-            lvl: this.state.lvl
+            lvl: this.state.lvl,
+            baseHexIDs: [],
+            spiritHexIDs: [],
+            wandHexIDs: []
         }
 
         let tempShamans = this.props.shamans 

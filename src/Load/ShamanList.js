@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class ShamanList extends Component {
     render () {
@@ -9,7 +10,7 @@ class ShamanList extends Component {
                 list.push(
                     <div>
                         <p>{this.props.shamans[shaman].name}</p>
-                        <button>Load</button>
+                        <button onClick={()=>{this.props.loadShaman(this.props.shamans[shaman])}}><Link to='/shaman'>Load</Link></button>
                     </div>
                 )
             }

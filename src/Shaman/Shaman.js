@@ -61,7 +61,7 @@ class Shaman extends Component {
 
           <div className='hex-list-div'>
             <h2>Available Wandering Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.wandSpiritHexes} />
+            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.wandHexes} />
           </div>
           </>
         )
@@ -82,9 +82,9 @@ class Shaman extends Component {
 
         <div className='current-hex-list-div'>
           <h2>Shaman's Hexes</h2>
-          {/* < HexDisplayList 
-            hexes={this.props.shaman.hexes}
-          /> */}
+          < HexDisplayList 
+            hexes={[...this.props.shaman.baseHexes, ...this.props.shaman.spiritHexes, ...this.props.shaman.wandHexes]}
+          />
           </div>
         </div>
 

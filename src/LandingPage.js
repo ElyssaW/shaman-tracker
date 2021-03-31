@@ -9,13 +9,12 @@ class LandingPage extends Component {
             <div>
                 <div>
                     <p>Load Previous Shaman</p>
-                    < ShamanList shamans={this.props.shamans} />
-                    < Link to='/shaman' >Load</Link>
+                    < ShamanList shamans={this.props.shamans} loadShaman={this.props.loadShaman} />
                 </div>
 
                 <div>
                     <p>Create new Shaman</p>
-                    < Link to='/new' >New</Link>
+                    < button >< Link to='/new' >New</Link></button>
                 </div>
             </div>
         )
