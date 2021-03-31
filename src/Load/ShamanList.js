@@ -11,6 +11,7 @@ class ShamanList extends Component {
                     <div>
                         <p>{this.props.shamans[shaman].name}</p>
                         <button onClick={()=>{this.props.loadShaman(this.props.shamans[shaman])}}><Link to='/shaman'>Load</Link></button>
+                        <button onClick={()=>{this.props.deleteShaman(this.props.shamans[shaman])}}>Delete</button>
                     </div>
                 )
             }

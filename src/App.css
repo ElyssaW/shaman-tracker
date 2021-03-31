@@ -50,13 +50,14 @@
 .selection-toggle {
   display: inline;
   text-align: center;
+  width: 8s00px;
 }
 
 .select-button {
   display: inline-block;
-  width: 25%;
-  padding: 5px 50px;
+  width: 150px;
   margin: 0;
+  text-align: center;
   text-decoration: none;
   color: #333;
 }

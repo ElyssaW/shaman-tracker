@@ -95,6 +95,13 @@ class App extends Component {
 
         this.setCurrentShaman(shaman)
       }
+
+      deleteShaman = (shaman) => {
+        let tempShamans = this.state.shamans
+        delete tempShamans[shaman.id]
+        localStorage.setItem('shamans', JSON.stringify(tempShamans))
+        this.setState({ shamans: tempShamans })
+      }
     
       setSpirit = (spirit) => {
         let tempHexes = [...HexData]
@@ -163,6 +170,7 @@ class App extends Component {
                      return (< LandingPage
                         shamans={this.state.shamans}
                         loadShaman={this.loadShaman}
+                        deleteShaman={this.deleteShaman}
                      />
                      )}} />
                     < Route exact path='/new' render={(props)=>{

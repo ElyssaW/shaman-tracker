@@ -9,7 +9,7 @@ class LandingPage extends Component {
             <div>
                 <div>
                     <p>Load Previous Shaman</p>
-                    < ShamanList shamans={this.props.shamans} loadShaman={this.props.loadShaman} />
+                    < ShamanList shamans={this.props.shamans} loadShaman={this.props.loadShaman} deleteShaman={this.props.deleteShaman} />
                 </div>
 
                 <div>

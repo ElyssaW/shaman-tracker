@@ -7,10 +7,9 @@ class SlimHexList extends Component {
 
         let list = this.props.hexes.map(hex => {
             return (
-                <div>
-                    < HexName hex={hex} />
+                <span>
                     < HexSelect hex={hex} setHex={this.props.setHex} />
-                </div>
+                </span>
             )
         })
         

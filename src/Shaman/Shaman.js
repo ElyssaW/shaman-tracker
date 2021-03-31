@@ -6,6 +6,7 @@ import spirit from '../Data/SpiritData.js';
 import SpiritList from '../Spirit/SpiritList.js'
 import HexSelectList from '../Hexes/Lists/HexSelectList.js'
 import HexDisplayList from '../Hexes/Lists/HexDisplayList.js'
+import SlimHexSelectList from '../Hexes/Lists/SlimHexSelectList'
 
 class Shaman extends Component {
 
@@ -50,18 +51,23 @@ class Shaman extends Component {
         display = (
           <>
           <div className='hex-list-div'>
-            <h2>Available Base Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.baseHexes} />
+            <h2>Available Hexes</h2>
+            < SlimHexSelectList setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
           </div>
 
           <div className='hex-list-div'>
-            <h2>Available Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.spiritHexes} />
+            <h2>Base Hexes</h2>
+            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
           </div>
 
           <div className='hex-list-div'>
-            <h2>Available Wandering Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.wandHexes} />
+            <h2>Spirit Hexes</h2>
+            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.spirit ? this.props.shaman.spirit.hex : []} />
+          </div>
+
+          <div className='hex-list-div'>
+            <h2>Wandering Spirit Hexes</h2>
+            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.wandSpirit ? this.props.shaman.wandSpirit.hex : []} />
           </div>
           </>
         )
