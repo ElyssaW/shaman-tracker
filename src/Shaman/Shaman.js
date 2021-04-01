@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Spirit from '../Spirit/Spirit.js'
 import BasicInfo from './BasicInfo.js'
 import Spells from '../Spells/Spells.js'
@@ -7,6 +8,7 @@ import SpiritList from '../Spirit/SpiritList.js'
 import HexSelectList from '../Hexes/Lists/HexSelectList.js'
 import HexDisplayList from '../Hexes/Lists/HexDisplayList.js'
 import SlimHexSelectList from '../Hexes/Lists/SlimHexSelectList'
+import SlimHexDisplayList from '../Hexes/Lists/SlimHexDisplayList.js'
 
 class Shaman extends Component {
 
@@ -19,6 +21,25 @@ class Shaman extends Component {
     let display 
     {
       switch(this.state.currentTab) {
+      case 'info':
+        display = (
+          <>
+          < BasicInfo shaman={this.props.shaman} />
+
+          <div className='spirit-div'>
+            < Spirit spirit={this.props.shaman.spirit} />
+          </div>
+
+          <div className='spirit-div'>
+            < Spirit spirit={this.props.shaman.wandSpirit} />
+          </div>
+
+          < HexDisplayList 
+            hexes={[...this.props.shaman.baseHexes, ...this.props.shaman.spiritHexes, ...this.props.shaman.wandHexes]}
+          />
+          </>
+        )
+        break;
       case 'spirit':
         display = (
           <>
@@ -52,22 +73,22 @@ class Shaman extends Component {
           <>
           <div className='hex-list-div'>
             <h2>Available Hexes</h2>
-            < SlimHexSelectList setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
+            < SlimHexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Base Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
+            < HexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} hexes={this.props.shaman.spirit ? this.props.shaman.spirit.hex : []} />
+            < HexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.spirit ? this.props.shaman.spirit.hex : []} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Wandering Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.wandSpirit ? this.props.shaman.wandSpirit.hex : []} />
+            < HexSelectList setHex={this.props.setWandHex} setHex={this.props.setHex} hexes={this.props.shaman.wandSpirit ? this.props.shaman.wandSpirit.hex : []} />
           </div>
           </>
         )
@@ -88,10 +109,12 @@ class Shaman extends Component {
 
         <div className='current-hex-list-div'>
           <h2>Shaman's Hexes</h2>
-          < HexDisplayList 
+          < SlimHexDisplayList 
             hexes={[...this.props.shaman.baseHexes, ...this.props.shaman.spiritHexes, ...this.props.shaman.wandHexes]}
           />
-          </div>
+        </div>
+
+        <button><Link to='/edit'>Edit</Link></button>
         </div>
 
         <div className='shaman-select'>

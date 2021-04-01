@@ -6,11 +6,15 @@ import React, { Component, useEffect } from 'react'
 import LandingPage from './LandingPage'
 import Shaman from './Shaman/Shaman.js'
 import NewShaman from './New/NewShaman';
+import spirit from './Data/SpiritData.js';
 
 class App extends Component {
 
     state = {
+      // Collection of user shamans, compressed and retrieved from local storage
       shamans: {},
+
+      // Shaman that the user is currently viewing/updating.
       currentShaman: {
           name: 'New Shaman',
           lvl: 1,
@@ -36,9 +40,13 @@ class App extends Component {
           wandHexes: [],
           wandHexIDs: [],
           // Hexes the shaman could select from
-          selectableHexes: [...HexData]
+          selectableBaseHexes: [...HexData],
+          selectableSpiritHexes: [],
+          selectableWandHexes: []
         }
       }
+
+      // -------------------- LIFE CYCLE METHOD FOR INITIAL LOAD-IN ----------------------- //
 
       componentDidMount() {
         if (localStorage.getItem('shamans')) {
@@ -48,117 +56,180 @@ class App extends Component {
         }
       }
 
-      setCurrentShaman = (shaman) => {
-        this.setState({
-          currentShaman : {...this.state.currentShaman, ...shaman}
+      // -------------------- HELPER FUNCTIONS FOR LOAD ----------------------- //
+
+      buildSpirit = (spiritId) => {
+        return data[spiritId]
+      }
+
+      buildSelectableHexes = (shaman, data) => {
+        return data.filter(hex => {
+          if (!shaman.baseHexes.includes(hex)) {
+            return hex
+          }
+        }) 
+      }
+
+      buildCurrentHexes = (selectableHexes, currentHexIDs) => {
+        return selectableHexes.filter(hex => {
+          currentHexIDs.includes(hex.id)
         })
       }
 
-      updateCurrentShamanToStorage = (shaman) => {
-        let tempShamans = this.state.shamans
-        tempShamans[shaman.id] = shaman
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
-      }
+      // -------------------- LOAD ----------------------- //
 
-      buildSelectableHexes = (shaman) => {
-        let selectableHexes = [...HexData]
-
-        if (shaman.spirit) {
-          selectableHexes = selectableHexes.concat(shaman.spirit.hex)
-        }
-        if (shaman.wandSpirit) {
-          selectableHexes = selectableHexes.concat(shaman.wandSpirit.hex)
-        }
-
-        return selectableHexes
+      retrieveShamansFromStorage = () => {
+        return JSON.parse(localStorage.getItem('shamans'))
       }
 
       loadShaman = (shaman) => {
-        console.log(shaman)
-        shaman.spirit = shaman.spiritId ? data[shaman.spiritId] : null
-        shaman.wandSpirit = shaman.wandSpiritId ? data[shaman.wandSpiritId] : null
+        shaman.spirit = shaman.spiritId ? this.buildSpirit(shaman.spiritId) : null
+        shaman.wandSpirit = shaman.wandSpiritId ? this.buildSpirit(shaman.wandSpiritId) : null
 
-        console.log('Logging hex data map')
-        shaman.baseHexes = HexData.filter(hex => {
-          shaman.baseHexIDs.includes(hex.id)
-        })
-
-        shaman.spiritHexes = shaman.spirit ? shaman.spirit.hex.filter(hex => {
-          shaman.spiritHexIDs.includes(hex.id)
-        }) : []
-
-        shaman.wandHexes = shaman.wandSpirit ? shaman.wandSpirit.hex.filter(hex => {
-          shaman.wandHexIDs.includes(hex.id)
-        }) : []
-
-        shaman.selectableHexes = this.buildSelectableHexes(shaman)
+        shaman.baseHexes = this.buildCurrentHexes(HexData, shaman.baseHexIDs)
+        shaman.spiritHexes = shaman.spirit ? this.buildCurrentHexes(shaman.spirit.hex, shaman.spiritHexIDs) : []
+        shaman.wandHexes = shaman.wandSpirit ? this.buildCurrentHexes(shaman.wandSpirit.hex, shaman.wandSpiritHexIDs) : []
+        
+        shaman.selectableBaseHexes = this.buildSelectableHexes(shaman, HexData)
+        shaman.selectableSpiritHexes = shaman.spirit ? this.buildSelectableHexes(shaman, shaman.spirit.hex) : []
+        shaman.selectableWandHexes = shaman.wandSpirit ? this.buildWandHexes(shaman, shaman.wandSpirit.hex) : []
 
         this.setCurrentShaman(shaman)
       }
 
-      deleteShaman = (shaman) => {
-        let tempShamans = this.state.shamans
-        delete tempShamans[shaman.id]
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
-        this.setState({ shamans: tempShamans })
-      }
-    
-      setSpirit = (spirit) => {
-        let tempHexes = [...HexData]
-        tempHexes = this.state.currentShaman.selectableHexes.concat(spirit.hex)
-        tempHexes = this.state.currentShaman.wandSpirit ? this.state.currentShaman.selectableHexes.concat(this.state.currentShaman.wandSpirit.hex) : tempHexes
-    
-        this.setState({
-          currentShaman: {...this.state.currentShaman, spirit, spiritId: spirit.id, selectableHexes: tempHexes }
+      // -------------------- HELPER FUNCTIONS FOR UPDATE ----------------------- //
+
+      convertHexesToIDs = (hexes) => {
+        return hexes.map(hex => {
+          return hex.id
         })
       }
-    
-      setWandSpirit = (spirit) => {
-        let tempHexes = [...HexData]
-        tempHexes = this.state.currentShaman.selectableHexes.concat(spirit.hex)
-        tempHexes = this.state.currentShaman.selectableHexes.concat(this.state.currentShaman.spirit.hex)
-    
-        this.setState({
-          currentShaman: {...this.state.currentShaman, wandSpirit: spirit, wandSpiritId: spirit.id, selectableHexes: tempHexes, wandHexes: [] }
-        })
-      }
-    
-      setBaseHex = (hex) => {
-        if (this.state.currentShaman.hexes.length < Math.floor(this.state.currentShaman.lvl / 2) && !this.state.currentShaman.baseHexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.baseHexes
-          let tempHexIDs = this.state.currentShaman.baseHexIDs
-          tempHexes.push(hex)
-          tempHexIDs.push(hex.id)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, baseHexes: tempHexes, baseHexIDs: tempHexIDs }
-          })
+
+      compressShamanForStorage = (shaman) => {
+        return {
+          id: shaman.id,
+          lvl: shaman.lvl,
+          name: shaman.name,
+          str: shaman.str,
+          dex: shaman.dex,
+          con: shaman.con,
+          int: shaman.int,
+          wis: shaman.wis,
+          cha: shaman.cha,
+
+          spiritId: shaman.spirit ? shaman.spirit.id : null,
+          wandSpiritId: shaman.wandSpirit ? shaman.wandSpirit.id : null,
+
+          baseHexIDs: shaman.baseHexes ? this.convertHexesToIDs(shaman.baseHexes) : [],
+          spiritHexIDs: shaman.spiritHexes ? this.convertHexesToIDs(shaman.spiritHexes) : [],
+          wandHexIDs: shaman.wandHexes ? this.convertHexesToIDs(shaman.wandHexes) : []
         }
       }
 
-      setSpiritHex = (hex) => {
-        if (this.state.currentShaman.hexes.length < Math.floor(this.state.currentShaman.lvl / 2) && !this.state.currentShaman.spiritHexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.spiritHexes
-          let tempHexIDs = this.state.currentShaman.spiritHexIDs
-          tempHexes.push(hex)
-          tempHexIDs.push(hex.id)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, spiritHexes: tempHexes, spiritHexIDs: tempHexIDs }
-          })
+      // -------------------- UPDATE ----------------------- //
+
+      saveShamansToStorage = (shamans) => {
+        localStorage.setItem('shamans', JSON.stringify(shamans))
+      }
+
+      updateShamansToState = (shamans) => {
+        this.setState({ shamans: { ...shamans }})
+      }
+
+      updateStorgeShaman = (shaman) => {
+        let tempShamans = this.retrieveShamansFromStorage()
+        tempShamans[shaman.id] = this.compressShamanForStorage(shaman)
+        this.saveShamansToStorage(tempShamans)
+      }
+
+      updateStateShaman = (shaman) => {
+        this.setState({
+          shaman: { ...this.state.currentShaman, ...shaman }
+        })
+      }
+
+      // -------------------- DELETE ----------------------- //
+
+      deleteShaman = (shaman) => {
+        console.log('Deleting...')
+        let tempShamans = this.retrieveShamansFromStorage()
+        delete tempShamans[shaman.id]
+        this.saveShamansToStorage(tempShamans)
+        this.updateShamansToState(tempShamans)
+      }
+
+      // -------------------- CHANGE SPIRIT ----------------------- //
+
+      changeSpirit = (spirit) => {
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.spirit = spirit
+        tempShaman.spiritId = spirit.id
+        tempShaman.spiritHexes = []
+        tempShaman.selectableSpiritHexes = this.buildSelectableHexes(tempShaman, spirit.hex)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorgeShaman(tempShaman)
+      }
+
+      changeWandSpirit = (spirit) => {
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.wandSpirit = spirit
+        tempShaman.wandSpiritId = spirit.id
+        tempShaman.wandHexes = []
+        tempShaman.selectableWandHexes = this.buildSelectableHexes(tempShaman, spirit.hex)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorgeShaman(tempShaman)
+      }
+
+      // -------------------- CHANGE HEX ----------------------- //
+
+      checkHexLevel = (shaman) => {
+        return (shaman.baseHexes.length + shaman.spiritHexes.length) < Math.floor(shaman.lvl / 2)
+      }
+
+      checkWandHexLevel = (shaman) => {
+        return (shaman.wandHexes.length === 0 || (shaman.lvl > 13 && shaman.wandHexes.length < 2))
+      }
+
+      changeBaseHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkHexLevel(tempShaman)) {
+          tempShaman.baseHexes.push(hex)
+          tempShaman.baseHexIDs.push(hex.id)
+          tempShaman.selectableBaseHexes = this.buildSelectableHexes(tempShaman, HexData)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorgeShaman(tempShaman)
         }
       }
-    
-      setWandHex = (hex) => {
-        if ((this.state.wandHexes.length === 0 || (this.state.lvl > 13 && this.state.wandHexes.length < 2)) && !this.state.hexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.wandHexes
-          let tempHexIDs = this.state.currentShaman.wandHexIDs
-          tempHexIDs.push(hex.id)
-          tempHexes.push(hex)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, wandHexes: tempHexes, wandHexIDs: tempHexIDs }
-          })
+
+      changeSpiritHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkHexLevel(tempShaman)) {
+          tempShaman.spiritHexes.push(hex)
+          tempShaman.spiritHexIDs.push(hex.id)
+          tempShaman.selectableSpiritHexes = this.buildSelectableHexes(tempShaman, tempShaman.spirit.hex)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorgeShaman(tempShaman)
+        }
+      }
+
+      changeWandHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkWandHexLevel(tempShaman)) {
+          tempShaman.wandHexes.push(hex)
+          tempShaman.wandHexIDs.push(hex.id)
+          tempShaman.selectableWandHexes = this.buildSelectableHexes(tempShaman, tempShaman.wandSpirit.hex)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorgeShaman(tempShaman)
         }
       }
 
@@ -183,6 +254,16 @@ class App extends Component {
                           />
                         )
                       }} />
+                    < Route exact path='/edit' render={(props)=>{
+                        return (
+                          < NewShaman 
+                            setCurrentShaman={this.updateCurrentShamanToStorage}
+                            shaman={this.state.currentShaman}
+                            shamans={this.state.shamans}
+                            HexData={HexData}
+                          />
+                        )
+                      }} />
                     < Route exact path='/shaman' render={(props)=> { 
                         return (
                           < Shaman
@@ -190,7 +271,7 @@ class App extends Component {
                             shaman={this.state.currentShaman}
                             setSpirit={this.setSpirit}
                             setWandSpirit={this.setWandSpirit}
-                            setHex={this.setHex}
+                            setHex={this.setSpiritHex}
                             setWandHex={this.setWandHex}
                           />
                         )

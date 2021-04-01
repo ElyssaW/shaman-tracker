@@ -5,14 +5,14 @@ import { v4 as uuidv4 } from 'uuid'
 class NewShaman extends Component {
     
     state = {
-        newName: '',
-        str: 10,
-        dex: 10,
-        con: 10,
-        wis: 10,
-        int: 10,
-        cha: 10,
-        lvl: 1,
+        newName: this.props.shaman.name,
+        str: this.props.shaman.str,
+        dex: this.props.shaman.dex,
+        con: this.props.shaman.con,
+        wis: this.props.shaman.wis,
+        int: this.props.shaman.int,
+        cha: this.props.shaman.cha,
+        lvl: this.props.shaman.lvl,
         submitted: false
     }
 
