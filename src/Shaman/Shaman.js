@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Spirit from '../Spirit/Spirit.js'
 import BasicInfo from './BasicInfo.js'
-import Spells from '../Spells/Spells.js'
-import spirit from '../Data/SpiritData.js';
 import SpiritList from '../Spirit/SpiritList.js'
 import HexSelectList from '../Hexes/Lists/HexSelectList.js'
 import HexDisplayList from '../Hexes/Lists/HexDisplayList.js'
 import SlimHexSelectList from '../Hexes/Lists/SlimHexSelectList'
 import SlimHexDisplayList from '../Hexes/Lists/SlimHexDisplayList.js'
+import InfoExpanded from './InfoExpand.js'
 
 class Shaman extends Component {
 
@@ -23,21 +22,9 @@ class Shaman extends Component {
       switch(this.state.currentTab) {
       case 'info':
         display = (
-          <>
-          < BasicInfo shaman={this.props.shaman} />
-
-          <div className='spirit-div'>
-            < Spirit spirit={this.props.shaman.spirit} />
-          </div>
-
-          <div className='spirit-div'>
-            < Spirit spirit={this.props.shaman.wandSpirit} />
-          </div>
-
-          < HexDisplayList 
-            hexes={[...this.props.shaman.baseHexes, ...this.props.shaman.spiritHexes, ...this.props.shaman.wandHexes]}
+          < InfoExpanded 
+            shaman={this.props.shaman}
           />
-          </>
         )
         break;
       case 'spirit':
@@ -72,23 +59,29 @@ class Shaman extends Component {
         display = (
           <>
           <div className='hex-list-div'>
-            <h2>Available Hexes</h2>
-            < SlimHexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
+            <h2>Available Base Hexes</h2>
+            < SlimHexSelectList setHex={this.props.setBaseHex} hexes={this.props.shaman.selectableBaseHexes} />
+            
+            <h2>Available Spirit Hexes</h2>
+            < SlimHexSelectList setHex={this.props.setSpiritHex} hexes={this.props.shaman.selectableSpiritHexes} />
+            
+            <h2>Available Wandering Hexes</h2>
+            < SlimHexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.selectableWandHexes} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Base Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.selectableHexes} />
+            < HexSelectList setHex={this.props.setBaseHex} hexes={this.props.shaman.selectableBaseHexes} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setHex} setHex={this.props.setHex} hexes={this.props.shaman.spirit ? this.props.shaman.spirit.hex : []} />
+            < HexSelectList setHex={this.props.setSpiritHex} hexes={this.props.shaman.selectableSpiritHexes} />
           </div>
 
           <div className='hex-list-div'>
             <h2>Wandering Spirit Hexes</h2>
-            < HexSelectList setHex={this.props.setWandHex} setHex={this.props.setHex} hexes={this.props.shaman.wandSpirit ? this.props.shaman.wandSpirit.hex : []} />
+            < HexSelectList setHex={this.props.setWandHex} hexes={this.props.shaman.selectableWandHexes} />
           </div>
           </>
         )
@@ -110,11 +103,21 @@ class Shaman extends Component {
         <div className='current-hex-list-div'>
           <h2>Shaman's Hexes</h2>
           < SlimHexDisplayList 
-            hexes={[...this.props.shaman.baseHexes, ...this.props.shaman.spiritHexes, ...this.props.shaman.wandHexes]}
+            hexes={[...this.props.shaman.baseHexes]}
+            removeHex={this.props.removeBaseHex}
+          />
+          < SlimHexDisplayList 
+            hexes={[...this.props.shaman.spiritHexes]}
+            removeHex={this.props.removeSpiritHex}
+          />
+          < SlimHexDisplayList 
+            hexes={[...this.props.shaman.wandHexes]}
+            removeHex={this.props.removeWandHex}
           />
         </div>
 
         <button><Link to='/edit'>Edit</Link></button>
+        <button><Link to='/'>Home</Link></button>
         </div>
 
         <div className='shaman-select'>

@@ -6,6 +6,7 @@ class NewShaman extends Component {
     
     state = {
         newName: this.props.shaman.name,
+        id: this.props.shaman.id ? this.props.shaman.id : uuidv4(),
         str: this.props.shaman.str,
         dex: this.props.shaman.dex,
         con: this.props.shaman.con,
@@ -13,6 +14,9 @@ class NewShaman extends Component {
         int: this.props.shaman.int,
         cha: this.props.shaman.cha,
         lvl: this.props.shaman.lvl,
+        baseHexIDs: this.props.shaman.baseHexIDs ? this.props.shaman.baseHexIDs : [],
+        spiritHexIDs: this.props.shaman.spiritHexIDs ? this.props.shaman.spiritHexIDs : [],
+        wandHexIDs: this.props.shaman.wandHexIDs ? this.props.shaman.wandHexIDs : [],
         submitted: false
     }
 
@@ -20,7 +24,7 @@ class NewShaman extends Component {
         e.preventDefault()
 
         const shaman = {
-            id: uuidv4(),
+            id: this.state.id,
             name: this.state.newName,
             str: this.state.str,
             dex: this.state.dex,
@@ -34,11 +38,8 @@ class NewShaman extends Component {
             wandHexIDs: []
         }
 
-        let tempShamans = this.props.shamans 
-        tempShamans[shaman.id] = shaman
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
-
-        this.props.setCurrentShaman(shaman)
+        this.props.updateStorageShaman(shaman)
+        this.props.updateStateShaman(shaman)
         this.setState({ submitted: true })
     }
 

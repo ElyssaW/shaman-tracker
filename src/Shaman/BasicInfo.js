@@ -4,7 +4,7 @@ class BasicInfo extends Component {
     render () {
         return (
             <div>
-                <h2 className='title bold'>{this.props.shaman.name}</h2>
+                <h2 className='title bold'>{this.props.shaman.name} (Lv. {this.props.shaman.lvl})</h2>
                 <div>
                     <p>
                         <div>

@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
-import Spell from '../Spells/Spell.js'
+import Spells from '../Spells/Lists/SpellsFull.js'
 
 class SpiritMagic extends Component {
 
-
     render () {
-
-        let spells = this.props.spirit.spells.map(spell => {
-            return <Spell spell={spell} />
-        })
 
         return (
             <div>
-                {spells}
+                <h3>Spirit Magic</h3>
+                <Spells spells={spells} />
             </div>
         )
     }
