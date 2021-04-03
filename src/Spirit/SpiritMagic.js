@@ -8,7 +8,7 @@ class SpiritMagic extends Component {
         return (
             <div>
                 <h3>Spirit Magic</h3>
-                <Spells spells={spells} />
+                <Spells spells={this.props.spirit.spells} />
             </div>
         )
     }

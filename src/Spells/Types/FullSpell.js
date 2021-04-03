@@ -1,43 +1,50 @@
 import React, { Component } from 'react'
+import SpellName from '../Components/SpellName.js'
+import SpellEffects from '../Components/SpellEffects.js'
+import SpellTrait from '../Components/SpellTrait.js'
 
 class Spell extends Component {
     render () {
 
         const spell = this.props.spell
 
-        const effects = spell.effects ? Object.keys(spell.effects).map((effect, i) => {
-            if (i < Object.keys(spell.effects).length - 1) {
-                return <span>{effect[0].toUpperCase() + effect.slice(1)}, </span>
-            } else {
-                return <span>{effect[0].toUpperCase() + effect.slice(1)}</span>
-            }
-        }) : 'None'
-
-        // if (spell.effects) {
-        //     console.log(Object.keys(spell.effects))
-        // }
-
-        console.log(spell)
-
         return (
-        <div>
-            <h3>{spell.name}</h3>
-            <p>School: {spell.school} {spell.subschool ? ', ' + spell.subschool : null}</p>
-            <p>Effects: {effects}</p>
-            <p>Level: {spell.spelllevel}</p>
-            <p>Casting Time: {spell.castingtime}, {spell.components}</p>
-            <p>Range: {spell.range} | Duration: {spell.duration} </p>
-            <p>Saving Throw: {spell.savingthrow} | Spell Resistance: {spell.spellresistance}</p>
-            
-            
-            
-            {/* {spell.shapeable} */}
-            
-            <p>{spell.description}</p>
-            <p>{spell.source}</p>
-{/*             
-            {spell.shortdescription} */}
-        </div>
+            <div>
+                < SpellName name={spell.name} />
+
+                <p>
+                    < SpellTrait name='Level' property={spell.spelllevel} />
+                </p>
+
+                <p>
+                    < SpellTrait name='School' property={spell.subschool ? spell.school + ', ' + spell.subschool : spell.school} />
+                    {' | '}< SpellEffects effects={Object.keys(spell.effects)} />
+                </p>
+                
+                <p>
+                    < SpellTrait name='Casting Time' property={spell.castingtime} />
+                    {' | '}< SpellTrait name='Range' property={spell.range} />
+                    {' | '}< SpellTrait name='Duration' property={spell.duration} />
+                </p>
+
+                <p>
+                    < SpellTrait name='Components' property={spell.components} />
+                </p>
+                
+                <p>
+                    < SpellTrait name='Saving Throw' property={spell.savingthrow} />
+                    {' | '}< SpellTrait name='Spell Resistance' property={spell.spellresistance} />
+                    {spell.shapeable ? ' | ' + < SpellTrait name='Shapeable' property={spell.shapeable} /> : null}
+                </p>
+                
+                <p>
+                    < SpellTrait name='Description' property={spell.description} />
+                </p>
+
+                <p>
+                    < SpellTrait name='Source' property={spell.source} />
+                </p>
+            </div>
         )
     }
 }
