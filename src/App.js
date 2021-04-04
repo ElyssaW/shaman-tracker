@@ -1,6 +1,7 @@
 import './App.css';
 import data from './Data/SpiritData.js'
 import HexData from './Data/HexData.js'
+import SpellData from './Data/ShamanSpells.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React, { Component, useEffect } from 'react'
 import LandingPage from './LandingPage/LandingPage'
@@ -311,6 +312,7 @@ class App extends Component {
                         return (
                           < Shaman
                             data={data}
+                            SpellData={SpellData}
                             shaman={this.state.currentShaman}
                             
                             setSpirit={this.setSpirit}

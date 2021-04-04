@@ -34,40 +34,78 @@ const fs = require('fs')
 //     })
 // })
 
-fs.readFile('SpellData.txt', function (err1, data) {
-    fs.readFile('SpiritData.txt', function (err2, SpiritData) {
-        if (err1) throw err1;
-        if (err2) throw err2;
+// fs.readFile('SpellData.txt', function (err1, data) {
+//     fs.readFile('SpiritData.txt', function (err2, SpiritData) {
+//         if (err1) throw err1;
+//         if (err2) throw err2;
 
-        let parsedSpellData = JSON.parse(data)
-        SpiritData = JSON.parse(SpiritData)
+//         let parsedSpellData = JSON.parse(data)
+//         SpiritData = JSON.parse(SpiritData)
         
-        let newSpirits = []
-        for (const spirit in SpiritData) {
-            let newSpells = []
-            let newSpirit = {}
+//         let newSpirits = []
+//         for (const spirit in SpiritData) {
+//             let newSpells = []
+//             let newSpirit = {}
     
-            SpiritData[spirit].spells.forEach(spell => {
+//             SpiritData[spirit].spells.forEach(spell => {
     
-                for (let i = 0; i < parsedSpellData.length; i++) {
-                    if (spell.name == parsedSpellData[i].name) {
-                        newSpells.push(parsedSpellData[i])
-                        break
-                    }
-                }
+//                 for (let i = 0; i < parsedSpellData.length; i++) {
+//                     if (spell.name == parsedSpellData[i].name) {
+//                         newSpells.push(parsedSpellData[i])
+//                         break
+//                     }
+//                 }
     
-            })
+//             })
     
-            newSpirit = SpiritData[spirit]
-            console.log(newSpirit)
-            newSpirit.spells = newSpells
-            newSpirits.push(newSpirit)
-        }
+//             newSpirit = SpiritData[spirit]
+//             console.log(newSpirit)
+//             newSpirit.spells = newSpells
+//             newSpirits.push(newSpirit)
+//         }
     
-        fs.writeFile('newSpirits.txt', JSON.stringify(newSpirits), function (err) {
-            if (err) throw err;
+//         fs.writeFile('newSpirits.txt', JSON.stringify(newSpirits), function (err) {
+//             if (err) throw err;
             
-            console.log('Saved!');
-        })
+//             console.log('Saved!');
+//         })
+//     })
+//})
+
+fs.readFile('SpellData.js', function(err, spellData) {
+    spellData = JSON.parse(spellData)
+    let shamanSpells = spellData.filter(spell => {
+        return spell.classes.shaman
+    })
+
+    shamanSpellsSorted = [[], [], [], [], [], [], [], [], [], []]
+
+    shamanSpells.forEach(spell => {
+        if (spell.level.includes('shaman 0')) {
+            shamanSpellsSorted[0].push(spell)
+        } else if (spell.level.includes('shaman 1')) {
+            shamanSpellsSorted[1].push(spell)
+        } else if (spell.level.includes('shaman 2')) {
+            shamanSpellsSorted[2].push(spell)
+        } else if (spell.level.includes('shaman 3')) {
+            shamanSpellsSorted[3].push(spell)
+        } else if (spell.level.includes('shaman 4')) {
+            shamanSpellsSorted[4].push(spell)
+        } else if (spell.level.includes('shaman 5')) {
+            shamanSpellsSorted[5].push(spell)
+        } else if (spell.level.includes('shaman 6')) {
+            shamanSpellsSorted[6].push(spell)
+        } else if (spell.level.includes('shaman 7')) {
+            shamanSpellsSorted[7].push(spell)
+        } else if (spell.level.includes('shaman 8')) {
+            shamanSpellsSorted[8].push(spell)
+        } else if (spell.level.includes('shaman 9')) {
+            shamanSpellsSorted[9].push(spell)
+        }
+    })
+
+    fs.writeFile('ShamanSpells.js', JSON.stringify(shamanSpellsSorted), function(err) {
+        if (err) throw err
+        console.log('Saved')
     })
 })
