@@ -5,7 +5,8 @@ class SpellSection extends Component {
 
     state = {
         currentTab: 0,
-        currentSpells: []
+        currentSpells: [],
+        search: ''
     }
 
     switchTab = (i) => {
@@ -20,6 +21,17 @@ class SpellSection extends Component {
                 currentSpells: this.props.spells[i]
             })
         }
+    }
+
+    updateSearch = (e) => {
+        let tempSpells = this.state.currentSpells
+        let search = e.target.value
+
+        tempSpells = tempSpells.filter(spell => {
+            return spell.description.includes(search)
+        })
+
+        this.setState({ currentSpells: [...tempSpells], search })
     }
 
     render () {
@@ -44,6 +56,10 @@ class SpellSection extends Component {
         <div>
             <div>
                 {navtabs}
+            </div>
+
+            <div>
+                < input onChange={(e)=>{this.setState({search: e.target.value})}} type='text' />
             </div>
 
             <h3>Spells</h3>
