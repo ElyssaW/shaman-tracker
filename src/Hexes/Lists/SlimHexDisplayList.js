@@ -8,6 +8,7 @@ class SlimHexList extends Component {
             return (
                 <div>
                     < HexName hex={hex} />
+                    <span><button onClick={() => {this.props.removeHex(hex)}}>Remove</button></span>
                 </div>
             )
         })

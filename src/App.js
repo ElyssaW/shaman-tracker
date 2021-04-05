@@ -1,16 +1,23 @@
 import './App.css';
 import data from './Data/SpiritData.js'
 import HexData from './Data/HexData.js'
+import ShamanSpellData from './Data/ShamanSpells.js'
+// import AllSpellData from './Data/SpellData.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React, { Component, useEffect } from 'react'
-import LandingPage from './LandingPage'
+import LandingPage from './LandingPage/LandingPage'
 import Shaman from './Shaman/Shaman.js'
 import NewShaman from './New/NewShaman';
+
+const AllSpellData = [[], [], [], [], [], [], [], [], [], []]
 
 class App extends Component {
 
     state = {
+      // Collection of user shamans, compressed and retrieved from local storage
       shamans: {},
+
+      // Shaman that the user is currently viewing/updating.
       currentShaman: {
           name: 'New Shaman',
           lvl: 1,
@@ -36,130 +43,372 @@ class App extends Component {
           wandHexes: [],
           wandHexIDs: [],
           // Hexes the shaman could select from
-          selectableHexes: [...HexData]
+          selectableBaseHexes: [...HexData],
+          selectableSpiritHexes: [],
+          selectableWandHexes: [],
+
+          spellsPerDay: [],
+          spells: [[], [], [], [], [], [], [], [], [], []],
+          spellIds: [[], [], [], [], [], [], [], [], [], []],
+
+          bab: 0,
+          fort: 0,
+          will: 0,
+          reflex: 0
         }
       }
+
+      // -------------------- LIFE CYCLE METHOD FOR INITIAL LOAD-IN ----------------------- //
 
       componentDidMount() {
         if (localStorage.getItem('shamans')) {
           this.setState({
             shamans: JSON.parse(localStorage.getItem('shamans'))
           })
+          console.log(localStorage.getItem('shamans'))
         }
       }
 
-      setCurrentShaman = (shaman) => {
-        this.setState({
-          currentShaman : {...this.state.currentShaman, ...shaman}
+      // -------------------- HELPER FUNCTIONS FOR LOAD ----------------------- //
+
+      buildSpirit = (spiritId) => {
+        return data[spiritId]
+      }
+
+      buildSelectableHexes = (data, currentHexes) => {
+        return data.filter(hex => {
+          if (!currentHexes.includes(hex)) {
+            return hex
+          }
+        }) 
+      }
+
+      buildCurrentHexes = (selectableHexes, currentHexIDs) => {
+        return selectableHexes.filter(hex => {
+          return currentHexIDs.includes(hex.id)
         })
       }
 
-      updateCurrentShamanToStorage = (shaman) => {
-        let tempShamans = this.state.shamans
-        tempShamans[shaman.id] = shaman
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
+      buildSaves = (shaman) => {
+        shaman.bab = Math.floor(shaman.lvl * .75)
+        shaman.will = Math.floor(shaman.lvl / 2) + 2 + shaman.wis
+        shaman.fort = Math.floor(shaman.lvl * .33) + shaman.con
+        shaman.reflex = Math.floor(shaman.lvl * .33) + shaman.dex
+
+        return shaman
       }
 
-      buildSelectableHexes = (shaman) => {
-        let selectableHexes = [...HexData]
-
-        if (shaman.spirit) {
-          selectableHexes = selectableHexes.concat(shaman.spirit.hex)
+      buildSpellsPerDay = (shaman) => {
+        console.log('Building spells per day')
+        const spellsPerDayDict = {
+          1: [3, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+          2: [4, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+          3: [4, 2, 1, 0, 0, 0, 0, 0, 0, 0],
+          4: [4, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+          5: [4, 3, 2, 1, 0, 0, 0, 0, 0, 0],
+          6: [4, 3, 3, 2, 0, 0, 0, 0, 0, 0],
+          7: [4, 4, 3, 2, 1, 0, 0, 0, 0, 0],
+          8: [4, 4, 3, 3, 2, 0, 0, 0, 0, 0],
+          9: [4, 4, 4, 3, 2, 1, 0, 0, 0, 0],
+          10: [4, 4, 4, 3, 3, 2, 0, 0, 0, 0],
+          11: [4, 4, 4, 4, 3, 2, 1, 0, 0, 0],
+          12: [4, 4, 4, 4, 3, 3, 2, 0, 0, 0],
+          13: [4, 4, 4, 4, 4, 3, 2, 1, 0, 0],
+          14: [4, 4, 4, 4, 4, 3, 3, 2, 0, 0],
+          15: [4, 4, 4, 4, 4, 4, 3, 2, 1, 0],
+          16: [4, 4, 4, 4, 4, 4, 3, 3, 2, 0],
+          17: [4, 4, 4, 4, 0, 4, 4, 3, 2, 1],
+          18: [4, 4, 4, 4, 0, 4, 4, 3, 3, 2],
+          19: [4, 4, 4, 4, 0, 4, 4, 4, 3, 3],
+          20: [4, 4, 4, 4, 0, 4, 4, 4, 4, 4]
         }
-        if (shaman.wandSpirit) {
-          selectableHexes = selectableHexes.concat(shaman.wandSpirit.hex)
+
+        const BonusSpellsDict = {
+          10: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          12: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          14: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+          16: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+          18: [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+          20: [2, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+          22: [2, 2, 1, 1, 1, 1, 0, 0, 0, 0],
+          24: [2, 2, 2, 1, 1, 1, 1, 0, 0, 0],
+          26: [2, 2, 2, 2, 1, 1, 1, 1, 0, 0],
+          28: [3, 2, 2, 2, 2, 1, 1, 1, 1, 0],
+          30: [3, 3, 2, 2, 2, 2, 1, 1, 1, 1],
+          32: [3, 3, 3, 2, 2, 2, 2, 1, 1, 1],
+          34: [3, 3, 3, 3, 2, 2, 2, 2, 1, 1],
+          36: [4, 3, 3, 3, 3, 2, 2, 2, 2, 1],
+          38: [4, 4, 3, 3, 3, 3, 2, 2, 2, 2],
+          40: [4, 4, 4, 3, 3, 3, 3, 2, 2, 2],
+          42: [4, 4, 4, 4, 3, 3, 3, 3, 2, 2],
+          44: [5, 4, 4, 4, 4, 3, 3, 3, 3, 2]
         }
 
-        return selectableHexes
+        return spellsPerDayDict[shaman.lvl].map((spellsPerDay, i) => {
+          if (spellsPerDay === 0) {
+            return 0
+          } else if (shaman.wis > 44) {
+            return spellsPerDay + BonusSpellsDict[44][i]
+          } else if (shaman.wis % 2 === 1) {
+            return spellsPerDay + BonusSpellsDict[shaman.wis-1][i]
+          } else {
+            return spellsPerDay + BonusSpellsDict[shaman.wis][i]
+          }
+        })
+      }
+
+      buildCurrentSpells = (spellIDs) => {
+        return spellIDs.map(level => {
+          if (level) {
+            return level.map(spellId => {
+              return ShamanSpellData[level][spellId]
+            })
+          } else {
+            return []
+          }
+        })
+      }
+
+      // -------------------- LOAD ----------------------- //
+
+      retrieveShamansFromStorage = () => {
+        return JSON.parse(localStorage.getItem('shamans'))
       }
 
       loadShaman = (shaman) => {
-        console.log(shaman)
-        shaman.spirit = shaman.spiritId ? data[shaman.spiritId] : null
-        shaman.wandSpirit = shaman.wandSpiritId ? data[shaman.wandSpiritId] : null
+        shaman.spirit = shaman.spiritId ? this.buildSpirit(shaman.spiritId) : null
+        shaman.wandSpirit = shaman.wandSpiritId ? this.buildSpirit(shaman.wandSpiritId) : null
 
-        console.log('Logging hex data map')
-        shaman.baseHexes = HexData.filter(hex => {
-          shaman.baseHexIDs.includes(hex.id)
-        })
+        shaman.baseHexes = this.buildCurrentHexes(HexData, shaman.baseHexIDs)
+        shaman.spiritHexes = shaman.spirit ? this.buildCurrentHexes(shaman.spirit.hex, shaman.spiritHexIDs) : []
+        shaman.wandHexes = shaman.wandSpirit ? this.buildCurrentHexes(shaman.wandSpirit.hex, shaman.wandHexIDs) : []
+        
+        shaman.selectableBaseHexes = this.buildSelectableHexes(HexData, shaman.baseHexes)
+        shaman.selectableSpiritHexes = shaman.spirit ? this.buildSelectableHexes(shaman.spirit.hex, shaman.spiritHexes) : []
+        shaman.selectableWandHexes = shaman.wandSpirit ? this.buildSelectableHexes(shaman.wandSpirit.hex, shaman.wandHexes) : []
 
-        shaman.spiritHexes = shaman.spirit ? shaman.spirit.hex.filter(hex => {
-          shaman.spiritHexIDs.includes(hex.id)
-        }) : []
+        shaman.spellsPerDay = this.buildSpellsPerDay(shaman)
+        shaman.spells = this.buildCurrentSpells(shaman.spellIDs)
 
-        shaman.wandHexes = shaman.wandSpirit ? shaman.wandSpirit.hex.filter(hex => {
-          shaman.wandHexIDs.includes(hex.id)
-        }) : []
-
-        shaman.selectableHexes = this.buildSelectableHexes(shaman)
-
-        this.setCurrentShaman(shaman)
+        console.log('Loading...')
+        this.updateStateShaman(shaman)
       }
+
+      // -------------------- HELPER FUNCTIONS FOR UPDATE ----------------------- //
+
+      convertHexesToIDs = (hexes) => {
+        return hexes.map(hex => {
+          return hex.id
+        })
+      }
+
+      compressShamanForStorage = (shaman) => {
+        return {
+          id: shaman.id,
+          lvl: shaman.lvl,
+          name: shaman.name,
+          str: shaman.str,
+          dex: shaman.dex,
+          con: shaman.con,
+          int: shaman.int,
+          wis: shaman.wis,
+          cha: shaman.cha,
+
+          spiritId: shaman.spirit ? shaman.spirit.id : null,
+          wandSpiritId: shaman.wandSpirit ? shaman.wandSpirit.id : null,
+
+          baseHexIDs: shaman.baseHexes ? this.convertHexesToIDs(shaman.baseHexes) : [],
+          spiritHexIDs: shaman.spiritHexes ? this.convertHexesToIDs(shaman.spiritHexes) : [],
+          wandHexIDs: shaman.wandHexes ? this.convertHexesToIDs(shaman.wandHexes) : [],
+
+          spellIDs: shaman.spellIDs ? shaman.spellIDs : [[], [], [], [], [], [], [], [], [], []]
+        }
+      }
+
+      // -------------------- UPDATE ----------------------- //
+
+      saveShamansToStorage = (shamans) => {
+        localStorage.setItem('shamans', JSON.stringify(shamans))
+      }
+
+      updateShamansToState = (shamans) => {
+        this.setState({ shamans: { ...shamans }})
+      }
+
+      updateStorageShaman = (shaman) => {
+        let tempShamans = this.retrieveShamansFromStorage()
+        tempShamans[shaman.id] = this.compressShamanForStorage(shaman)
+        this.saveShamansToStorage(tempShamans)
+      }
+
+      updateStateShaman = (shaman) => {
+        this.setState({
+          currentShaman: { ...this.state.currentShaman, ...shaman }
+        })
+      }
+
+      // -------------------- DELETE ----------------------- //
 
       deleteShaman = (shaman) => {
-        let tempShamans = this.state.shamans
+        let tempShamans = this.retrieveShamansFromStorage()
         delete tempShamans[shaman.id]
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
-        this.setState({ shamans: tempShamans })
+        this.saveShamansToStorage(tempShamans)
+        this.updateShamansToState(tempShamans)
       }
-    
+
+      // -------------------- CHANGE SPIRIT ----------------------- //
+
       setSpirit = (spirit) => {
-        let tempHexes = [...HexData]
-        tempHexes = this.state.currentShaman.selectableHexes.concat(spirit.hex)
-        tempHexes = this.state.currentShaman.wandSpirit ? this.state.currentShaman.selectableHexes.concat(this.state.currentShaman.wandSpirit.hex) : tempHexes
-    
-        this.setState({
-          currentShaman: {...this.state.currentShaman, spirit, spiritId: spirit.id, selectableHexes: tempHexes }
-        })
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.spirit = spirit
+        tempShaman.spiritId = spirit.id
+        tempShaman.spiritHexes = []
+        tempShaman.selectableSpiritHexes = this.buildSelectableHexes(spirit.hex, tempShaman.spiritHexes)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
       }
-    
+
       setWandSpirit = (spirit) => {
-        let tempHexes = [...HexData]
-        tempHexes = this.state.currentShaman.selectableHexes.concat(spirit.hex)
-        tempHexes = this.state.currentShaman.selectableHexes.concat(this.state.currentShaman.spirit.hex)
-    
-        this.setState({
-          currentShaman: {...this.state.currentShaman, wandSpirit: spirit, wandSpiritId: spirit.id, selectableHexes: tempHexes, wandHexes: [] }
-        })
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.wandSpirit = spirit
+        tempShaman.wandSpiritId = spirit.id
+        tempShaman.wandHexes = []
+        tempShaman.selectableWandHexes = this.buildSelectableHexes(spirit.hex, tempShaman.wandHexes)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
       }
-    
+
+      // -------------------- CHANGE HEX ----------------------- //
+
+      checkHexLevel = (shaman) => {
+        return (shaman.baseHexes.length + shaman.spiritHexes.length) < Math.floor(shaman.lvl / 2)
+      }
+
+      checkWandHexLevel = (shaman) => {
+        return (shaman.wandHexes.length === 0 || (shaman.lvl > 13 && shaman.wandHexes.length < 2))
+      }
+
       setBaseHex = (hex) => {
-        if (this.state.currentShaman.hexes.length < Math.floor(this.state.currentShaman.lvl / 2) && !this.state.currentShaman.baseHexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.baseHexes
-          let tempHexIDs = this.state.currentShaman.baseHexIDs
-          tempHexes.push(hex)
-          tempHexIDs.push(hex.id)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, baseHexes: tempHexes, baseHexIDs: tempHexIDs }
-          })
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkHexLevel(tempShaman)) {
+          tempShaman.baseHexes.push(hex)
+          tempShaman.baseHexIDs.push(hex.id)
+          tempShaman.selectableBaseHexes = this.buildSelectableHexes(HexData, tempShaman.baseHexes)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorageShaman(tempShaman)
         }
       }
 
       setSpiritHex = (hex) => {
-        if (this.state.currentShaman.hexes.length < Math.floor(this.state.currentShaman.lvl / 2) && !this.state.currentShaman.spiritHexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.spiritHexes
-          let tempHexIDs = this.state.currentShaman.spiritHexIDs
-          tempHexes.push(hex)
-          tempHexIDs.push(hex.id)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, spiritHexes: tempHexes, spiritHexIDs: tempHexIDs }
-          })
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkHexLevel(tempShaman)) {
+          tempShaman.spiritHexes.push(hex)
+          tempShaman.spiritHexIDs.push(hex.id)
+          tempShaman.selectableSpiritHexes = this.buildSelectableHexes(tempShaman.spirit.hex, tempShaman.spiritHexes)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorageShaman(tempShaman)
         }
       }
-    
+
       setWandHex = (hex) => {
-        if ((this.state.wandHexes.length === 0 || (this.state.lvl > 13 && this.state.wandHexes.length < 2)) && !this.state.hexes.includes(hex)) {
-          let tempHexes = this.state.currentShaman.wandHexes
-          let tempHexIDs = this.state.currentShaman.wandHexIDs
-          tempHexIDs.push(hex.id)
-          tempHexes.push(hex)
-      
-          this.setState({
-            currentShaman: { ...this.state.currentShaman, wandHexes: tempHexes, wandHexIDs: tempHexIDs }
-          })
+        let tempShaman = this.state.currentShaman
+
+        if (this.checkWandHexLevel(tempShaman)) {
+          tempShaman.wandHexes.push(hex)
+          tempShaman.wandHexIDs.push(hex.id)
+          tempShaman.selectableWandHexes = this.buildSelectableHexes(tempShaman.wandSpirit.hex, tempShaman.wandHexes)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorageShaman(tempShaman)
         }
+      }
+
+      // -------------------- REMOVE HEX ----------------------- //
+
+      removeIDFromList = (idToRemove, list) => {
+        return list.filter(item => {
+          return item.id != idToRemove
+        }) 
+      }
+
+      removeBaseHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.baseHexIDs = this.removeIDFromList(hex.id, tempShaman.baseHexIDs)
+        tempShaman.baseHexes = this.buildCurrentHexes(HexData, tempShaman.baseHexIDs)
+        tempShaman.selectableBaseHexes = this.buildSelectableHexes(HexData, tempShaman.baseHexes)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
+      }
+
+      removeSpiritHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.spiritHexIDs = this.removeIDFromList(hex.id, tempShaman.spiritHexIDs)
+        tempShaman.spiritHexes = this.buildCurrentHexes(tempShaman.spirit.hex, tempShaman.spiritHexIDs)
+        tempShaman.selectableSpiritHexes = this.buildSelectableHexes(tempShaman.spirit.hex, tempShaman.spiritHexes)
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
+      }
+
+      removeWandHex = (hex) => {
+        let tempShaman = this.state.currentShaman
+        
+        tempShaman.wandHexIDs = this.removeIDFromList(hex.id, tempShaman.wandHexes)
+        tempShaman.wandHexes = this.buildCurrentHexes(tempShaman.wandSpirit.hex, tempShaman.wandHexIDs)
+        tempShaman.selectableWandHexes = this.buildSelectableHexes(tempShaman.wandSpirit.hex, tempShaman.wandHexes)
+        
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
+      }
+
+      // -------------------- ADD SPELL ----------------------- //
+
+      spellCapCheck = (shaman, level) => {
+        console.log('Spell check')
+        console.log(shaman.spellsPerDay)
+        console.log(shaman.spells)
+        if (!shaman.spells[level] || shaman.spellsPerDay[level] > shaman.spells[level].length) {
+          return true
+        } else {
+          return false
+        }
+      }
+
+      addSpell = (spell, level) => {
+        let tempShaman = this.state.currentShaman
+
+        if (this.spellCapCheck(tempShaman, level)) {
+          tempShaman.spells[level].push(spell)
+          tempShaman.spellIDs[level].push(spell.lvlId)
+
+          this.updateStateShaman(tempShaman)
+          this.updateStorageShaman(tempShaman)
+        }
+      }
+
+      removeSpell = (spell, level) => {
+        let tempShaman = this.state.currentShaman
+
+        tempShaman.spells[level] = tempShaman.spells[level].filter(oldSpell => {
+          return oldSpell.id != spell.id
+        })
+        tempShaman.spellIDs[level] = tempShaman.spellIDs[level].filter(oldSpellID => {
+          return oldSpellID != spell.id
+        })
+
+        this.updateStateShaman(tempShaman)
+        this.updateStorageShaman(tempShaman)
       }
 
     render () {
@@ -173,13 +422,23 @@ class App extends Component {
                         deleteShaman={this.deleteShaman}
                      />
                      )}} />
+
                     < Route exact path='/new' render={(props)=>{
                         return (
                           < NewShaman 
-                            setCurrentShaman={this.setCurrentShaman}
                             shaman={this.state.currentShaman}
-                            shamans={this.state.shamans}
-                            HexData={HexData}
+                            updateStateShaman={this.updateStateShaman}
+                            updateStorageShaman={this.updateStorageShaman}
+                          />
+                        )
+                      }} />
+                      
+                    < Route exact path='/edit' render={(props)=>{
+                        return (
+                          < NewShaman 
+                          shaman={this.state.currentShaman}
+                          updateStateShaman={this.updateStateShaman}
+                          updateStorageShaman={this.updateStorageShaman}
                           />
                         )
                       }} />
@@ -187,11 +446,22 @@ class App extends Component {
                         return (
                           < Shaman
                             data={data}
+                            SpellData={ShamanSpellData}
                             shaman={this.state.currentShaman}
+                            
                             setSpirit={this.setSpirit}
                             setWandSpirit={this.setWandSpirit}
-                            setHex={this.setHex}
+
+                            setBaseHex={this.setBaseHex}
+                            setSpiritHex={this.setSpiritHex}
                             setWandHex={this.setWandHex}
+
+                            removeBaseHex={this.removeBaseHex}
+                            removeSpiritHex={this.removeSpiritHex}
+                            removeWandHex={this.removeWandHex}
+
+                            addSpell={this.addSpell}
+                            removeSpell={this.removeSpell}
                           />
                         )
                     }} />

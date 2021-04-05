@@ -5,14 +5,18 @@ import { v4 as uuidv4 } from 'uuid'
 class NewShaman extends Component {
     
     state = {
-        newName: '',
-        str: 10,
-        dex: 10,
-        con: 10,
-        wis: 10,
-        int: 10,
-        cha: 10,
-        lvl: 1,
+        newName: this.props.shaman.name,
+        id: this.props.shaman.id ? this.props.shaman.id : uuidv4(),
+        str: this.props.shaman.str,
+        dex: this.props.shaman.dex,
+        con: this.props.shaman.con,
+        wis: this.props.shaman.wis,
+        int: this.props.shaman.int,
+        cha: this.props.shaman.cha,
+        lvl: this.props.shaman.lvl,
+        baseHexIDs: this.props.shaman.baseHexIDs ? this.props.shaman.baseHexIDs : [],
+        spiritHexIDs: this.props.shaman.spiritHexIDs ? this.props.shaman.spiritHexIDs : [],
+        wandHexIDs: this.props.shaman.wandHexIDs ? this.props.shaman.wandHexIDs : [],
         submitted: false
     }
 
@@ -20,7 +24,7 @@ class NewShaman extends Component {
         e.preventDefault()
 
         const shaman = {
-            id: uuidv4(),
+            id: this.state.id,
             name: this.state.newName,
             str: this.state.str,
             dex: this.state.dex,
@@ -31,14 +35,12 @@ class NewShaman extends Component {
             lvl: this.state.lvl,
             baseHexIDs: [],
             spiritHexIDs: [],
-            wandHexIDs: []
+            wandHexIDs: [],
+            spellIds: [[], [], [], [], [], [], [], [], [], []],
         }
 
-        let tempShamans = this.props.shamans 
-        tempShamans[shaman.id] = shaman
-        localStorage.setItem('shamans', JSON.stringify(tempShamans))
-
-        this.props.setCurrentShaman(shaman)
+        this.props.updateStorageShaman(shaman)
+        this.props.updateStateShaman(shaman)
         this.setState({ submitted: true })
     }
 
