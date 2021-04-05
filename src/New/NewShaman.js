@@ -35,7 +35,8 @@ class NewShaman extends Component {
             lvl: this.state.lvl,
             baseHexIDs: [],
             spiritHexIDs: [],
-            wandHexIDs: []
+            wandHexIDs: [],
+            spellIds: [[], [], [], [], [], [], [], [], [], []],
         }
 
         this.props.updateStorageShaman(shaman)

@@ -26,6 +26,7 @@ class Shaman extends Component {
         display = (
           < InfoExpanded 
             shaman={this.props.shaman}
+            removeSpell={this.props.removeSpell}
           />
         )
         break;
@@ -91,7 +92,7 @@ class Shaman extends Component {
       case 'spells':
         display = (
           <div>
-            < SpellSection spells={this.props.SpellData} shaman={this.props.shaman} />
+            < SpellSection spells={this.props.SpellData} shaman={this.props.shaman} addSpell={this.props.addSpell} />
           </div>
         )
         break;

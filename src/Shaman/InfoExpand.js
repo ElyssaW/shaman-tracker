@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BasicInfo from './BasicInfo.js'
 import Spirit from '../Spirit/Spirit.js'
 import HexDisplayList from '../Hexes/Lists/HexDisplayList'
+import SpellsSlim from '../Spells/Lists/SpellsSlim.js'
 
 class InfoExpanded extends Component {
     render () {
@@ -28,6 +29,9 @@ class InfoExpanded extends Component {
                 < HexDisplayList 
                 hexes={[...this.props.shaman.wandHexes]}
                 />
+
+                <h4>Spells</h4>
+                < SpellsSlim spells={this.props.shaman.spells} removeSpell={this.props.removeSpell} />
             </>
         )
     }
