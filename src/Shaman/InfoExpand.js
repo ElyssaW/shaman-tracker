@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BasicInfo from './BasicInfo.js'
-import Spirit from '../Spirit/Spirit.js'
+import Spirit from '../Spirit/Components/Spirit.js'
 import HexDisplayList from '../Hexes/Lists/HexDisplayList'
 import SpellsSlim from '../Spells/Lists/SpellsSlim.js'
 

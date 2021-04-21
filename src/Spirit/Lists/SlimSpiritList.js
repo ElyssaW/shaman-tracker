@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import spirit from '../Data/SpiritData'
-import SpiritSelect from './SpiritSelect'
+import SpiritSelect from '../Components/SpiritSelect'
 
 class SpiritList extends Component {
     render () {

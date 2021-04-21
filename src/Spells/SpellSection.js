@@ -6,6 +6,7 @@ class SpellSection extends Component {
     state = {
         currentTab: 0,
         currentSpells: [],
+        allSpells: [],
         search: ''
     }
 
@@ -13,22 +14,24 @@ class SpellSection extends Component {
         if (i === 10) {
             this.setState({
                 currentTab: i,
+                allSpells: this.props.spells.flat(),
                 currentSpells: this.props.spells.flat()
             })
         } else {
             this.setState({
                 currentTab: i,
+                allSpells: this.props.spells[i],
                 currentSpells: this.props.spells[i]
             })
         }
     }
 
     updateSearch = (e) => {
-        let tempSpells = this.state.currentSpells
+        let tempSpells = this.state.allSpells
         let search = e.target.value
 
         tempSpells = tempSpells.filter(spell => {
-            return spell.description.includes(search)
+            return spell.description.includes(search) || spell.name.includes(search)
         })
 
         this.setState({ currentSpells: [...tempSpells], search })
@@ -59,10 +62,13 @@ class SpellSection extends Component {
             </div>
 
             <div>
-                < input onChange={(e)=>{this.setState({search: e.target.value})}} type='text' />
+                <h3>Search</h3>
+                < input className='full' onChange={(e)=>{this.updateSearch(e)}} type='text' />
             </div>
 
-            <h3>Spells</h3>
+            <h3>Spells
+                <span> ({this.state.currentTab < 10 ? 'Level ' + this.state.currentTab : 'All'})</span>
+            </h3>
             < SpellsFull spells={this.state.currentSpells} addSpell={this.props.addSpell} />
         </div>
         )

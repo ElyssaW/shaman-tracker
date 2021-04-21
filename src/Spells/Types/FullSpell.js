@@ -4,12 +4,13 @@ import SpellEffects from '../Components/SpellEffects.js'
 import SpellTrait from '../Components/SpellTrait.js'
 
 class Spell extends Component {
+
     render () {
 
         const spell = this.props.spell
 
         return (
-            <div>
+            <div className='text-div'>
                 < SpellName name={spell.name} />
 
                 <p>

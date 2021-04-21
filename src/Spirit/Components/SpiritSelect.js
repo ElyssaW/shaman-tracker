@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class SpiritSelect extends Component {
     render () {
         return (
-            <button onClick={()=>{this.props.setSpirit(this.props.spirit)}}>{this.props.spirit.name}</button>
+            <button className='button red button-full' onClick={()=>{this.props.setSpirit(this.props.spirit)}}>{this.props.spirit.name}</button>
         )
     }
 }
