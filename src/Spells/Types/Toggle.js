@@ -25,7 +25,7 @@ class Toggle extends Component {
         )
 
         return (
-            <div>
+            <div className='toggle-open'>
                 {display}
                 <button onClick={(e)=>{this.toggle(e)}}>{this.state.open ? 'Close' : 'Open'}</button>
             </div>

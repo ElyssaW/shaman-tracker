@@ -34,8 +34,9 @@ class Toggle extends Component {
         const display = this.state.open ? (
             <>
                 {button}
-                {this.props.expanded}
-                {button}
+                <div className='toggle-open'>
+                    {this.props.expanded}
+                </div>
             </>
         ) : (
             <>  

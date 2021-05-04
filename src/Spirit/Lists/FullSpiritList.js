@@ -11,7 +11,12 @@ class SpiritList extends Component {
                 < Toggle 
                     title = {item.name}
                     action = {()=>{this.props.setSpirit(item)}}
-                    expanded = {< Spirit spirit={item} />}
+                    expanded = {
+                        <>
+                            < Spirit spirit={item} />
+                            < SpiritSelect spirit={item} />
+                        </>
+                    }
                 />
             )
         })

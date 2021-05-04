@@ -55,17 +55,23 @@ class Shaman extends Component {
             }, {
               name: 'Spirit',
               content: 
+                <>
+                <h2>Spirit Selection</h2>
                 < FullSpiritList 
                   setSpirit={this.props.setSpirit} 
                   spirits={Object.values(this.props.data)} 
                 />
+                </>
             }, {
               name: 'Wandering Spirit',
               content: 
+                <>
+                <h2>Wandering Spirit Selection</h2>
                 < FullSpiritList 
                   setSpirit={this.props.setWandSpirit} 
                   spirits={Object.values(this.props.data)} 
                 />
+                </>
             },{
               name: 'Hexes',
               content: 
