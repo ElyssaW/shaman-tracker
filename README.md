@@ -11,3 +11,6 @@ This is an app to help you keep track of your Pathfinder 1E Shaman characters. Y
 
 ## Known bugs
 - Full spell list for each spirit doesn't display under the Shaman's current spirits tab
+
+## Tech Stack
+Built in React using class-based components. Which are old school, but I wanted to have material work proving that I can utilize class-based React as well as function-based.
