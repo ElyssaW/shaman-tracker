@@ -3,7 +3,6 @@
 This is an app to help you keep track of your Pathfinder 1E Shaman characters. You can create a new Shaman, or if you've made Shamans before, load in a previous character. Keep track of basic stats, spirits, wandering spirits, hexes, and spells, and change your loadout easily to take advantage of the Shaman's in-built flexibility, without getting bogged down by bookwork.
 
 ## Notes
-
 - Character info is stored in Local Storage
 - Archetypes are currently not supported
 - Hexes that change the mechnical logic of the class are not currently supported - there's only two, the Arcane Secret from the Lore Spirit and the Fluid Mastery from the Waves spirit
@@ -14,3 +13,4 @@ This is an app to help you keep track of your Pathfinder 1E Shaman characters. Y
 
 ## Tech Stack
 Built in React using class-based components. Which are old school, but I wanted to have material work proving that I can utilize class-based React as well as function-based.
+
