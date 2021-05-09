@@ -7,14 +7,23 @@ class LandingPage extends Component {
 
         return (
             <div>
-                <div>
-                    <p>Load Previous Shaman</p>
-                    < ShamanList shamans={this.props.shamans} loadShaman={this.props.loadShaman} deleteShaman={this.props.deleteShaman} />
-                </div>
+                <h1>Shaman Tracker</h1>
+                <p>Play your character and skip the bookwork. Create a new shaman or load an old one. Keep all the info on your build in one place.</p>
 
                 <div>
-                    <p>Create new Shaman</p>
-                    < button >< Link to='/new' >New</Link></button>
+                    <div>
+                        < ShamanList shamans={this.props.shamans} loadShaman={this.props.loadShaman} deleteShaman={this.props.deleteShaman} />
+                    </div>
+
+                    <div>
+                        <p>Create new Shaman</p>
+                        < button className='button button-full red' >< Link to='/new' >New</Link></button>
+                    </div>
+
+                    <div>
+                        <p>See the Shaman Class rulebook</p>
+                        < button className='button button-full red' >< Link to='/rules' >Rules</Link></button>
+                    </div>
                 </div>
             </div>
         )

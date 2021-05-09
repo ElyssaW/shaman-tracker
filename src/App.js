@@ -4,10 +4,12 @@ import HexData from './Data/HexData.js'
 import ShamanSpellData from './Data/ShamanSpells.js'
 // import AllSpellData from './Data/SpellData.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import React, { Component, useEffect } from 'react'
 import LandingPage from './LandingPage/LandingPage'
 import Shaman from './Shaman/Shaman.js'
 import NewShaman from './New/NewShaman';
+import Rules from './Rules/Rules.js'
 
 const AllSpellData = [[], [], [], [], [], [], [], [], [], []]
 
@@ -158,10 +160,10 @@ class App extends Component {
       }
 
       buildCurrentSpells = (spellIDs) => {
-        return spellIDs.map(level => {
+        return spellIDs.map((level, i) => {
           if (level) {
             return level.map(spellId => {
-              return ShamanSpellData[level][spellId]
+              return ShamanSpellData[i][spellId]
             })
           } else {
             return []
@@ -236,7 +238,11 @@ class App extends Component {
       }
 
       updateStorageShaman = (shaman) => {
-        let tempShamans = this.retrieveShamansFromStorage()
+        let tempShamans = {}
+        if(localStorage.getItem('shamans')) {
+          tempShamans = this.retrieveShamansFromStorage()
+        }
+
         tempShamans[shaman.id] = this.compressShamanForStorage(shaman)
         this.saveShamansToStorage(tempShamans)
       }
@@ -414,7 +420,16 @@ class App extends Component {
     render () {
         return (
             <div className='container'>
+
                 < Router >
+                    <div>
+                      <ul className='navbar site-nav'>
+                        <Link to='/'><li>Home</li></Link>
+                        <Link to='/new'><li>New</li></Link>
+                        <Link to='/rules'><li>Rules</li></Link>
+                      </ul>
+                    </div>
+
                     < Route exact path='/' render={()=>{
                      return (< LandingPage
                         shamans={this.state.shamans}
@@ -442,6 +457,13 @@ class App extends Component {
                           />
                         )
                       }} />
+
+                      < Route exact path='/rules' render={(props)=>{
+                        return (
+                          < Rules />
+                        )
+                      }} />
+
                     < Route exact path='/shaman' render={(props)=> { 
                         return (
                           < Shaman

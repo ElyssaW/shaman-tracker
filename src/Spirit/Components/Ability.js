@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Ability extends Component {
     render () {
         return (
-            <div>
+            <div className='text-div'>
                 <h3>{this.props.name}</h3>
                 <p>{this.props.desc}</p>
             </div>

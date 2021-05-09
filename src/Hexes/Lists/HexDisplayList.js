@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HexDesc from '../Components/HexDesc.js'
 import HexSelect from '../Components/HexSelect.js'
+import Toggle from '../../Shaman/Toggle.js'
 
 class HexList extends Component {
     render () {
@@ -8,7 +9,15 @@ class HexList extends Component {
         let list = this.props.hexes.map(hex => {
             return (
                 <div>
-                    < HexDesc hex={hex} />
+                    
+                    < Toggle 
+                        expanded = {
+                            < HexDesc hex={hex} />
+                        }
+                        collapsed = {
+                            <button className='button red button-full'>{hex.name}</button>
+                        }
+                    />
                 </div>
             )
         })

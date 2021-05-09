@@ -4,8 +4,11 @@ class HexDesc extends Component {
     render () {
         return (
             <>
-                <h2>{this.props.hex.name}</h2>
-                <p>Type: <span>{this.props.hex.type}</span> | {this.props.hex.desc}</p>
+                <>
+                    <h2 className='inline'>{this.props.hex.name} ({this.props.hex.type})</h2>
+                </>
+
+                <p className='text-div'>{this.props.hex.desc}</p>
             </>
         )
     }

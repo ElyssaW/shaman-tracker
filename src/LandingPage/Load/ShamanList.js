@@ -8,10 +8,15 @@ class ShamanList extends Component {
         if (this.props.shamans) {
             for (const shaman in this.props.shamans) {
                 list.push(
-                    <div>
-                        <p>{this.props.shamans[shaman].name}</p>
-                        <button onClick={()=>{this.props.loadShaman(this.props.shamans[shaman])}}><Link to='/shaman'>Load</Link></button>
-                        <button onClick={()=>{this.props.deleteShaman(this.props.shamans[shaman])}}>Delete</button>
+                    <div className='row load-div'>
+                        <Link className='button-full button red'
+                        to='/shaman'
+                        onClick={()=>{this.props.loadShaman(this.props.shamans[shaman])}}
+                        >
+                            Load {this.props.shamans[shaman].name}
+                        </Link>
+                        
+                        <button className='button danger' onClick={()=>{this.props.deleteShaman(this.props.shamans[shaman])}}>Delete</button>
                     </div>
                 )
             }

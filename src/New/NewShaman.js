@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import Stat from './Components/Stat.js'
 import { v4 as uuidv4 } from 'uuid'
 
 class NewShaman extends Component {
@@ -18,6 +19,33 @@ class NewShaman extends Component {
         spiritHexIDs: this.props.shaman.spiritHexIDs ? this.props.shaman.spiritHexIDs : [],
         wandHexIDs: this.props.shaman.wandHexIDs ? this.props.shaman.wandHexIDs : [],
         submitted: false
+    }
+
+    raiseStat = (e, stat) => {
+        e.preventDefault()
+        if(this.state[stat] < 21) {
+            this.setState({
+                [stat]: this.state[stat] + 1
+            })
+        }
+    }
+
+    lowerStat = (e, stat) => {
+        e.preventDefault()
+        if (this.state[stat] > 1) {
+            this.setState({
+                [stat]: this.state[stat] - 1
+            })
+        }
+    }
+
+    setStat = (stat, value) => {
+        console.log('Running')
+        if(value > 1) {
+            this.setState({
+                [stat]: value
+            })
+        }
     }
 
     createShaman = (e) => {
@@ -54,41 +82,80 @@ class NewShaman extends Component {
 
         return (
             <div>
-                < form >
+                < form className='col' >
                     <div>
                         <h2><label htmlFor='name' >Name</label></h2>
-                        < input type='text' name='name' value={this.state.newName} onChange={(e) => {this.setState({ newName: e.target.value })}} />
-                    </div>
-                    <div className='flex'>
-                        <div className='col'>
-                            <label htmlFor='str' >Strength</label>
-                            < input type='number' name='str' value={this.state.str} onChange={(e) => {this.setState({ str: e.target.value })}} />
-
-                            <label htmlFor='dex' >Dexterity</label>
-                            < input type='number' name='dex' value={this.state.dex} onChange={(e) => {this.setState({ dex: e.target.value })}} />
-
-                            <label htmlFor='con' >Constitution</label>
-                            < input type='number' name='con' value={this.state.con} onChange={(e) => {this.setState({ con: e.target.value })}} />
-                        </div>
-
-                        <div className='col'>
-                            <label htmlFor='int' >Intelligence</label>
-                            < input type='number' name='int' value={this.state.int} onChange={(e) => {this.setState({ int: e.target.value })}} />
-
-                            <label htmlFor='wis' >Wisdom</label>
-                            < input type='number' name='wis' value={this.state.wis} onChange={(e) => {this.setState({ wis: e.target.value })}} />
-
-                            <label htmlFor='cha' >Charisma</label>
-                            < input type='number' name='cha' value={this.state.cha} onChange={(e) => {this.setState({ cha: e.target.value })}} />
-                        </div>
+                        < input type='text' className='font-big name-input' name='name' value={this.state.newName} onChange={(e) => {this.setState({ newName: e.target.value })}} />
                     </div>
 
                     <div>
-                        <h2><label htmlFor='lvl' >Level</label></h2>
-                        < input type='number' name='lvl' value={this.state.lvl} onChange={(e) => {this.setState({ lvl: e.target.value })}} />
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.str}
+                            statNameFull='Strength'
+                            statName='str'
+                        />
+                            
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.dex}
+                            statNameFull='Dexterity'
+                            statName='dex'
+                        />
+
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.con}
+                            statNameFull='Constitution'
+                            statName='con'
+                        />
+
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.int}
+                            statNameFull='Intelligence'
+                            statName='int'
+                        />
+
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.wis}
+                            statNameFull='Wisdom'
+                            statName='wis'
+                        />
+
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.cha}
+                            statNameFull='Charisma'
+                            statName='cha'
+                        />
                     </div>
 
-                    <input type='submit' onClick={(e)=>{this.createShaman(e)}} />
+                    <div>
+                        < Stat 
+                            raiseStat={this.raiseStat}
+                            lowerStat={this.lowerStat}
+                            setStat={this.setStat}
+                            stat={this.state.lvl}
+                            statNameFull='Level'
+                            statName='lvl'
+                        />
+                    </div>
+
+                    <input type='submit' value='Create New Character' className='submit-button button red' onClick={(e)=>{this.createShaman(e)}} />
                 </form>
             </div>
         )

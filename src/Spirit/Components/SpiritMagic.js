@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Spells from '../Spells/Lists/SpellsFull.js'
+import Spells from '../../Spells/Lists/SpellsFull.js'
 
 class SpiritMagic extends Component {
 

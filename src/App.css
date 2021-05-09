@@ -1,0 +1,166 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+.container {
+    padding: 5%;
+}
+
+.button{
+    padding: 20px;
+    border: none;
+    font: inherit;
+}
+
+.button:active{
+    background-color: #A96240;
+}
+
+.font-big {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.red{
+    background-color: #684551;
+    color: #fafafa
+}
+
+.danger{
+    background-color: coral;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.shaman-info {
+    min-width: 450px;
+}
+
+.button-full{
+    width: 100%;
+}
+
+.load-div{
+    margin: 10px 0;
+}
+
+.full {
+    width: 100%;
+}
+
+.inline {
+    display: inline;
+}
+
+.navbar {
+    list-style: none;
+    margin: 0;
+    max-width: 100%;
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+.site-nav {
+    background-color: #684551;
+    color: #fafafa;
+}
+
+.tab-navbar {
+    background-color: coral;
+    color: #684551;
+}
+
+.toggle-left {
+    text-align: left;
+    width: 80%;
+}
+
+.toggle-right {
+    text-align: right;
+    width:  20%;
+}
+
+/****** New character window ******/
+
+.stat-div{
+    margin: 20px 0;
+}
+
+.name-input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid coral;
+    transition: .3s;
+    text-align: center;
+    font-size: 30px;
+}
+
+.name-input:focus {
+    border-bottom: 4px solid coral;
+}
+
+.arrow-button {
+    padding: 20px 30px;
+    border-bottom: 5px solid #402E2A;
+}
+
+.arrow-button:active {
+    border-top: 5px solid coral;
+    border-bottom: none;
+}
+
+.stat-field {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-button {
+    width: 100%;
+    margin: 10px;
+    align-self: center;
+}
+
+.table-contents-link {
+    width: 100%;
+    font-size: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.text-div{
+    text-align: justify;
+    border-left: 3px coral solid;
+    padding: 0 0 0 10px;
+}
+
+.toggle-open {
+    padding: 0 0 30px 0;
+}
